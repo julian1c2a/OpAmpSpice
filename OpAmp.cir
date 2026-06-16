@@ -57,13 +57,8 @@ R_p2 n_p2_drive preout2 1k
 C_p2 preout2 gnd {1 / (2 * pi * Fp2 * 1k)}
 
 * Etapa de salida con saturación de voltaje
-B2 n_vac gnd V=max(min(v(preout2), v(vcc) - {Vdrop_pos}), v(vee) + {Vdrop_neg})
-
-* Etapa de límite de corriente de salida (Transconductancia con saturación)
-* Multiplicamos por 1e6 para forzar un seguimiento ideal del voltaje n_vac, limitado por Iout_max
-B_limit n_limited gnd I=max(min((v(n_vac) - v(n_limited))*1e6, {Iout_max}), -{Iout_max})
-* Resistencia dummy para dar camino DC al nodo y estabilizar
-R_dummy n_limited gnd 1Meg
+* Etapa de voltaje de salida con saturación (sin límite de corriente conductivo para evitar oscilaciones de SPICE)
+B2 n_limited gnd V=max(min(v(preout2), v(vcc) - {Vdrop_pos}), v(vee) + {Vdrop_neg})
 
 * Resistencia de salida
 Rout_inst out n_limited {Rout}

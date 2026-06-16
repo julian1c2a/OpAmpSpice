@@ -1,0 +1,49 @@
+* Testbench para comparar el comportamiento de los SupOpAmps
+* Ganancia configurada: Av1=25, Av2=25, Av3=10 -> Ganancia Total = 6250 (aprox 75.9 dB)
+
+.include SupOpAmp.cir
+
+* Alimentación simétrica estándar
+Vcc vcc 0 DC 15V
+Vee vee 0 DC -15V
+
+* Entrada diferencial
+V_in_minus in- 0 DC 0
+V_in_plus in+ 0 DC 0 AC 1 SIN(0 1mV 1k)
+
+* Instancias
+X0 in+ in- out_ideal vcc vee 0 SupOpAmp Av1=25 Av2=25 Av3=10
+X1 in+ in- out_LM741 vcc vee 0 SupOpAmp_LM741 Av1=25 Av2=25 Av3=10
+X2 in+ in- out_TL081 vcc vee 0 SupOpAmp_TL081 Av1=25 Av2=25 Av3=10
+X6 in+ in- out_OP07 vcc vee 0 SupOpAmp_OP07 Av1=25 Av2=25 Av3=10
+X10 in+ in- out_AD797 vcc vee 0 SupOpAmp_AD797 Av1=25 Av2=25 Av3=10
+X13 in+ in- out_AD8009 vcc vee 0 SupOpAmp_AD8009 Av1=25 Av2=25 Av3=10
+X14 in+ in- out_LMH6702 vcc vee 0 SupOpAmp_LMH6702 Av1=25 Av2=25 Av3=10
+X5 in+ in- out_NE5532 vcc vee 0 SupOpAmp_NE5532 Av1=25 Av2=25 Av3=10
+X19 in+ in- out_LT1210 vcc vee 0 SupOpAmp_LT1210 Av1=25 Av2=25 Av3=10
+
+.control
+  * 1. Análisis en Frecuencia (AC)
+  ac dec 50 1 100Meg
+  
+  let target_db = 72.9
+  
+  meas ac bw_ideal WHEN vdb(out_ideal)=target_db FALL=1
+  meas ac bw_LM741 WHEN vdb(out_LM741)=target_db FALL=1
+  meas ac bw_TL081 WHEN vdb(out_TL081)=target_db FALL=1
+  meas ac bw_OP07 WHEN vdb(out_OP07)=target_db FALL=1
+  meas ac bw_NE5532 WHEN vdb(out_NE5532)=target_db FALL=1
+  meas ac bw_AD797 WHEN vdb(out_AD797)=target_db FALL=1
+  meas ac bw_AD8009 WHEN vdb(out_AD8009)=target_db FALL=1
+  meas ac bw_LMH6702 WHEN vdb(out_LMH6702)=target_db FALL=1
+  meas ac bw_LT1210 WHEN vdb(out_LT1210)=target_db FALL=1
+
+  * 2. Análisis Transitorio (Tiempo)
+  tran 10u 3m
+  
+  meas tran pk_ideal MAX v(out_ideal) FROM=1m TO=3m
+  meas tran pk_LM741 MAX v(out_LM741) FROM=1m TO=3m
+  meas tran pk_OP07 MAX v(out_OP07) FROM=1m TO=3m
+  meas tran pk_AD8009 MAX v(out_AD8009) FROM=1m TO=3m
+.endc
+.end

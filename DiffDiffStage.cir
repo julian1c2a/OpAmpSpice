@@ -1,0 +1,257 @@
+* Etapas diferenciales primeras, con salidas diferenciales, con Ganancia ajustable como parámetro.
+
+.include OpAmp.cir
+
+* ====================================================================
+* ETAPA GENÉRICA (Usa el modelo idealizado base)
+* ====================================================================
+.subckt Diff_In_Diff_Out_stage_amp inp+ inn+ outp outn vcc vee gnd PARAMS: Av=1000
+
+* Seleccionamos Rp y Rn de forma dinámica usando condicionales ternarios
+* Si Av >= 1000, Rp = 10k. Si Av <= 100, Rp = 1k. En medio, Rp = Av * 10.
+.param Rp_val={ Av >= 1000 ? 10k : (Av <= 100 ? 1k : Av * 10) }
+.param Rn_val={ Rp_val }
+
+* Calculamos Rg. Prevenimos una división por cero si el usuario pide Av=1 (buffer)
+.param Rg_val={ Av <= 1.001 ? 1000G : (2 * Rp_val / (Av - 1)) }
+
+Xp inp+ inp- outp vcc vee gnd OpAmp
+Xn inn+ inn- outn vcc vee gnd OpAmp
+Rp inp- outp {Rp_val}
+Rn inn- outn {Rn_val}
+Rg inp- inn- {Rg_val}
+
+.ends Diff_In_Diff_Out_stage_amp
+
+
+* ====================================================================
+* LIBRERÍA DE ETAPAS DIFERENCIALES CON OPAMPS COMERCIALES
+* ====================================================================
+
+* LM741 (Propósito General)
+.subckt diffdiff_LM741 inp+ inn+ outp outn vcc vee gnd PARAMS: Av=1000
+.param Rp_val={ Av >= 1000 ? 10k : (Av <= 100 ? 1k : Av * 10) }
+.param Rn_val={ Rp_val }
+.param Rg_val={ Av <= 1.001 ? 1000G : (2 * Rp_val / (Av - 1)) }
+Xp inp+ inp- outp vcc vee gnd LM741
+Xn inn+ inn- outn vcc vee gnd LM741
+Rp inp- outp {Rp_val}
+Rn inn- outn {Rn_val}
+Rg inp- inn- {Rg_val}
+.ends diffdiff_LM741
+
+* TL081 (Propósito General JFET)
+.subckt diffdiff_TL081 inp+ inn+ outp outn vcc vee gnd PARAMS: Av=1000
+.param Rp_val={ Av >= 1000 ? 10k : (Av <= 100 ? 1k : Av * 10) }
+.param Rn_val={ Rp_val }
+.param Rg_val={ Av <= 1.001 ? 1000G : (2 * Rp_val / (Av - 1)) }
+Xp inp+ inp- outp vcc vee gnd TL081
+Xn inn+ inn- outn vcc vee gnd TL081
+Rp inp- outp {Rp_val}
+Rn inn- outn {Rn_val}
+Rg inp- inn- {Rg_val}
+.ends diffdiff_TL081
+
+* TL071 (Propósito General JFET)
+.subckt diffdiff_TL071 inp+ inn+ outp outn vcc vee gnd PARAMS: Av=1000
+.param Rp_val={ Av >= 1000 ? 10k : (Av <= 100 ? 1k : Av * 10) }
+.param Rn_val={ Rp_val }
+.param Rg_val={ Av <= 1.001 ? 1000G : (2 * Rp_val / (Av - 1)) }
+Xp inp+ inp- outp vcc vee gnd TL071
+Xn inn+ inn- outn vcc vee gnd TL071
+Rp inp- outp {Rp_val}
+Rn inn- outn {Rn_val}
+Rg inp- inn- {Rg_val}
+.ends diffdiff_TL071
+
+* LM358 (Fuente Simple)
+.subckt diffdiff_LM358 inp+ inn+ outp outn vcc vee gnd PARAMS: Av=1000
+.param Rp_val={ Av >= 1000 ? 10k : (Av <= 100 ? 1k : Av * 10) }
+.param Rn_val={ Rp_val }
+.param Rg_val={ Av <= 1.001 ? 1000G : (2 * Rp_val / (Av - 1)) }
+Xp inp+ inp- outp vcc vee gnd LM358
+Xn inn+ inn- outn vcc vee gnd LM358
+Rp inp- outp {Rp_val}
+Rn inn- outn {Rn_val}
+Rg inp- inn- {Rg_val}
+.ends diffdiff_LM358
+
+* NE5532 (Audio / Bajo Ruido)
+.subckt diffdiff_NE5532 inp+ inn+ outp outn vcc vee gnd PARAMS: Av=1000
+.param Rp_val={ Av >= 1000 ? 10k : (Av <= 100 ? 1k : Av * 10) }
+.param Rn_val={ Rp_val }
+.param Rg_val={ Av <= 1.001 ? 1000G : (2 * Rp_val / (Av - 1)) }
+Xp inp+ inp- outp vcc vee gnd NE5532
+Xn inn+ inn- outn vcc vee gnd NE5532
+Rp inp- outp {Rp_val}
+Rn inn- outn {Rn_val}
+Rg inp- inn- {Rg_val}
+.ends diffdiff_NE5532
+
+* MCP601 (Rail-to-Rail)
+.subckt diffdiff_MCP601 inp+ inn+ outp outn vcc vee gnd PARAMS: Av=1000
+.param Rp_val={ Av >= 1000 ? 10k : (Av <= 100 ? 1k : Av * 10) }
+.param Rn_val={ Rp_val }
+.param Rg_val={ Av <= 1.001 ? 1000G : (2 * Rp_val / (Av - 1)) }
+Xp inp+ inp- outp vcc vee gnd MCP601
+Xn inn+ inn- outn vcc vee gnd MCP601
+Rp inp- outp {Rp_val}
+Rn inn- outn {Rn_val}
+Rg inp- inn- {Rg_val}
+.ends diffdiff_MCP601
+
+* OP07 (Precisión)
+.subckt diffdiff_OP07 inp+ inn+ outp outn vcc vee gnd PARAMS: Av=1000
+.param Rp_val={ Av >= 1000 ? 10k : (Av <= 100 ? 1k : Av * 10) }
+.param Rn_val={ Rp_val }
+.param Rg_val={ Av <= 1.001 ? 1000G : (2 * Rp_val / (Av - 1)) }
+Xp inp+ inp- outp vcc vee gnd OP07
+Xn inn+ inn- outn vcc vee gnd OP07
+Rp inp- outp {Rp_val}
+Rn inn- outn {Rn_val}
+Rg inp- inn- {Rg_val}
+.ends diffdiff_OP07
+
+* OP27 (Precisión / Bajo Ruido)
+.subckt diffdiff_OP27 inp+ inn+ outp outn vcc vee gnd PARAMS: Av=1000
+.param Rp_val={ Av >= 1000 ? 10k : (Av <= 100 ? 1k : Av * 10) }
+.param Rn_val={ Rp_val }
+.param Rg_val={ Av <= 1.001 ? 1000G : (2 * Rp_val / (Av - 1)) }
+Xp inp+ inp- outp vcc vee gnd OP27
+Xn inn+ inn- outn vcc vee gnd OP27
+Rp inp- outp {Rp_val}
+Rn inn- outn {Rn_val}
+Rg inp- inn- {Rg_val}
+.ends diffdiff_OP27
+
+* AD8628 (Precisión Zero-Drift)
+.subckt diffdiff_AD8628 inp+ inn+ outp outn vcc vee gnd PARAMS: Av=1000
+.param Rp_val={ Av >= 1000 ? 10k : (Av <= 100 ? 1k : Av * 10) }
+.param Rn_val={ Rp_val }
+.param Rg_val={ Av <= 1.001 ? 1000G : (2 * Rp_val / (Av - 1)) }
+Xp inp+ inp- outp vcc vee gnd AD8628
+Xn inn+ inn- outn vcc vee gnd AD8628
+Rp inp- outp {Rp_val}
+Rn inn- outn {Rn_val}
+Rg inp- inn- {Rg_val}
+.ends diffdiff_AD8628
+
+* LT1028 (Ultra Bajo Ruido)
+.subckt diffdiff_LT1028 inp+ inn+ outp outn vcc vee gnd PARAMS: Av=1000
+.param Rp_val={ Av >= 1000 ? 10k : (Av <= 100 ? 1k : Av * 10) }
+.param Rn_val={ Rp_val }
+.param Rg_val={ Av <= 1.001 ? 1000G : (2 * Rp_val / (Av - 1)) }
+Xp inp+ inp- outp vcc vee gnd LT1028
+Xn inn+ inn- outn vcc vee gnd LT1028
+Rp inp- outp {Rp_val}
+Rn inn- outn {Rn_val}
+Rg inp- inn- {Rg_val}
+.ends diffdiff_LT1028
+
+* AD797 (Ultra Bajo Ruido)
+.subckt diffdiff_AD797 inp+ inn+ outp outn vcc vee gnd PARAMS: Av=1000
+.param Rp_val={ Av >= 1000 ? 10k : (Av <= 100 ? 1k : Av * 10) }
+.param Rn_val={ Rp_val }
+.param Rg_val={ Av <= 1.001 ? 1000G : (2 * Rp_val / (Av - 1)) }
+Xp inp+ inp- outp vcc vee gnd AD797
+Xn inn+ inn- outn vcc vee gnd AD797
+Rp inp- outp {Rp_val}
+Rn inn- outn {Rn_val}
+Rg inp- inn- {Rg_val}
+.ends diffdiff_AD797
+
+* OPA2134 (Audio de Alta Fidelidad)
+.subckt diffdiff_OPA2134 inp+ inn+ outp outn vcc vee gnd PARAMS: Av=1000
+.param Rp_val={ Av >= 1000 ? 10k : (Av <= 100 ? 1k : Av * 10) }
+.param Rn_val={ Rp_val }
+.param Rg_val={ Av <= 1.001 ? 1000G : (2 * Rp_val / (Av - 1)) }
+Xp inp+ inp- outp vcc vee gnd OPA2134
+Xn inn+ inn- outn vcc vee gnd OPA2134
+Rp inp- outp {Rp_val}
+Rn inn- outn {Rn_val}
+Rg inp- inn- {Rg_val}
+.ends diffdiff_OPA2134
+
+* AD8009 (Alta Velocidad >100MHz)
+.subckt diffdiff_AD8009 inp+ inn+ outp outn vcc vee gnd PARAMS: Av=1000
+.param Rp_val={ Av >= 1000 ? 10k : (Av <= 100 ? 1k : Av * 10) }
+.param Rn_val={ Rp_val }
+.param Rg_val={ Av <= 1.001 ? 1000G : (2 * Rp_val / (Av - 1)) }
+Xp inp+ inp- outp vcc vee gnd AD8009
+Xn inn+ inn- outn vcc vee gnd AD8009
+Rp inp- outp {Rp_val}
+Rn inn- outn {Rn_val}
+Rg inp- inn- {Rg_val}
+.ends diffdiff_AD8009
+
+* LMH6702 (Alta Velocidad >100MHz)
+.subckt diffdiff_LMH6702 inp+ inn+ outp outn vcc vee gnd PARAMS: Av=1000
+.param Rp_val={ Av >= 1000 ? 10k : (Av <= 100 ? 1k : Av * 10) }
+.param Rn_val={ Rp_val }
+.param Rg_val={ Av <= 1.001 ? 1000G : (2 * Rp_val / (Av - 1)) }
+Xp inp+ inp- outp vcc vee gnd LMH6702
+Xn inn+ inn- outn vcc vee gnd LMH6702
+Rp inp- outp {Rp_val}
+Rn inn- outn {Rn_val}
+Rg inp- inn- {Rg_val}
+.ends diffdiff_LMH6702
+
+* THS3001 (Alta Velocidad >100MHz)
+.subckt diffdiff_THS3001 inp+ inn+ outp outn vcc vee gnd PARAMS: Av=1000
+.param Rp_val={ Av >= 1000 ? 10k : (Av <= 100 ? 1k : Av * 10) }
+.param Rn_val={ Rp_val }
+.param Rg_val={ Av <= 1.001 ? 1000G : (2 * Rp_val / (Av - 1)) }
+Xp inp+ inp- outp vcc vee gnd THS3001
+Xn inn+ inn- outn vcc vee gnd THS3001
+Rp inp- outp {Rp_val}
+Rn inn- outn {Rn_val}
+Rg inp- inn- {Rg_val}
+.ends diffdiff_THS3001
+
+* L272 (Alta Corriente / Potencia)
+.subckt diffdiff_L272 inp+ inn+ outp outn vcc vee gnd PARAMS: Av=1000
+.param Rp_val={ Av >= 1000 ? 10k : (Av <= 100 ? 1k : Av * 10) }
+.param Rn_val={ Rp_val }
+.param Rg_val={ Av <= 1.001 ? 1000G : (2 * Rp_val / (Av - 1)) }
+Xp inp+ inp- outp vcc vee gnd L272
+Xn inn+ inn- outn vcc vee gnd L272
+Rp inp- outp {Rp_val}
+Rn inn- outn {Rn_val}
+Rg inp- inn- {Rg_val}
+.ends diffdiff_L272
+
+* OPA541 (Alta Corriente / Potencia)
+.subckt diffdiff_OPA541 inp+ inn+ outp outn vcc vee gnd PARAMS: Av=1000
+.param Rp_val={ Av >= 1000 ? 10k : (Av <= 100 ? 1k : Av * 10) }
+.param Rn_val={ Rp_val }
+.param Rg_val={ Av <= 1.001 ? 1000G : (2 * Rp_val / (Av - 1)) }
+Xp inp+ inp- outp vcc vee gnd OPA541
+Xn inn+ inn- outn vcc vee gnd OPA541
+Rp inp- outp {Rp_val}
+Rn inn- outn {Rn_val}
+Rg inp- inn- {Rg_val}
+.ends diffdiff_OPA541
+
+* LM3886 (Audio Potencia / Alta Corriente)
+.subckt diffdiff_LM3886 inp+ inn+ outp outn vcc vee gnd PARAMS: Av=1000
+.param Rp_val={ Av >= 1000 ? 10k : (Av <= 100 ? 1k : Av * 10) }
+.param Rn_val={ Rp_val }
+.param Rg_val={ Av <= 1.001 ? 1000G : (2 * Rp_val / (Av - 1)) }
+Xp inp+ inp- outp vcc vee gnd LM3886
+Xn inn+ inn- outn vcc vee gnd LM3886
+Rp inp- outp {Rp_val}
+Rn inn- outn {Rn_val}
+Rg inp- inn- {Rg_val}
+.ends diffdiff_LM3886
+
+* LT1210 (Corriente Rápida / Amplificador de Línea)
+.subckt diffdiff_LT1210 inp+ inn+ outp outn vcc vee gnd PARAMS: Av=1000
+.param Rp_val={ Av >= 1000 ? 10k : (Av <= 100 ? 1k : Av * 10) }
+.param Rn_val={ Rp_val }
+.param Rg_val={ Av <= 1.001 ? 1000G : (2 * Rp_val / (Av - 1)) }
+Xp inp+ inp- outp vcc vee gnd LT1210
+Xn inn+ inn- outn vcc vee gnd LT1210
+Rp inp- outp {Rp_val}
+Rn inn- outn {Rn_val}
+Rg inp- inn- {Rg_val}
+.ends diffdiff_LT1210

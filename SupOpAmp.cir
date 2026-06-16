@@ -1,0 +1,270 @@
+* SupOpAmp: Amplificador de super alta ganancia y precisión
+* Arquitectura: 2 etapas Diff-Diff + 1 etapa Diferencial-Asimétrica
+
+.include DiffDiffStage.cir
+
+* ====================================================================
+* ETAPA GENÉRICA (Usa el macromodelo base)
+* ====================================================================
+.subckt SupOpAmp in+ in- out vcc vee gnd PARAMS: Av1=10 Av2=10 Av3=10
+X_stage1 in+ in- out1_p out1_n vcc vee gnd Diff_In_Diff_Out_stage_amp Av={Av1}
+X_stage2 out1_p out1_n out2_p out2_n vcc vee gnd Diff_In_Diff_Out_stage_amp Av={Av2}
+.param R1_val = 10k
+.param R2_val = { R1_val * Av3 }
+R1 out2_n opamp_in_minus {R1_val}
+R2 opamp_in_minus out {R2_val}
+R3 out2_p opamp_in_plus {R1_val}
+R4 opamp_in_plus gnd {R2_val}
+X_stage3 opamp_in_plus opamp_in_minus out vcc vee gnd OpAmp
+.ends SupOpAmp
+
+* ====================================================================
+* LIBRERÍA DE SUPOPAMPS COMERCIALES
+* ====================================================================
+
+* LM741 (Propósito General)
+.subckt SupOpAmp_LM741 in+ in- out vcc vee gnd PARAMS: Av1=10 Av2=10 Av3=10
+X_stage1 in+ in- out1_p out1_n vcc vee gnd diffdiff_LM741 Av={Av1}
+X_stage2 out1_p out1_n out2_p out2_n vcc vee gnd diffdiff_LM741 Av={Av2}
+.param R1_val = 10k
+.param R2_val = { R1_val * Av3 }
+R1 out2_n opamp_in_minus {R1_val}
+R2 opamp_in_minus out {R2_val}
+R3 out2_p opamp_in_plus {R1_val}
+R4 opamp_in_plus gnd {R2_val}
+X_stage3 opamp_in_plus opamp_in_minus out vcc vee gnd LM741
+.ends SupOpAmp_LM741
+
+* TL081 (Propósito General JFET)
+.subckt SupOpAmp_TL081 in+ in- out vcc vee gnd PARAMS: Av1=10 Av2=10 Av3=10
+X_stage1 in+ in- out1_p out1_n vcc vee gnd diffdiff_TL081 Av={Av1}
+X_stage2 out1_p out1_n out2_p out2_n vcc vee gnd diffdiff_TL081 Av={Av2}
+.param R1_val = 10k
+.param R2_val = { R1_val * Av3 }
+R1 out2_n opamp_in_minus {R1_val}
+R2 opamp_in_minus out {R2_val}
+R3 out2_p opamp_in_plus {R1_val}
+R4 opamp_in_plus gnd {R2_val}
+X_stage3 opamp_in_plus opamp_in_minus out vcc vee gnd TL081
+.ends SupOpAmp_TL081
+
+* TL071 (Propósito General JFET)
+.subckt SupOpAmp_TL071 in+ in- out vcc vee gnd PARAMS: Av1=10 Av2=10 Av3=10
+X_stage1 in+ in- out1_p out1_n vcc vee gnd diffdiff_TL071 Av={Av1}
+X_stage2 out1_p out1_n out2_p out2_n vcc vee gnd diffdiff_TL071 Av={Av2}
+.param R1_val = 10k
+.param R2_val = { R1_val * Av3 }
+R1 out2_n opamp_in_minus {R1_val}
+R2 opamp_in_minus out {R2_val}
+R3 out2_p opamp_in_plus {R1_val}
+R4 opamp_in_plus gnd {R2_val}
+X_stage3 opamp_in_plus opamp_in_minus out vcc vee gnd TL071
+.ends SupOpAmp_TL071
+
+* LM358 (Fuente Simple)
+.subckt SupOpAmp_LM358 in+ in- out vcc vee gnd PARAMS: Av1=10 Av2=10 Av3=10
+X_stage1 in+ in- out1_p out1_n vcc vee gnd diffdiff_LM358 Av={Av1}
+X_stage2 out1_p out1_n out2_p out2_n vcc vee gnd diffdiff_LM358 Av={Av2}
+.param R1_val = 10k
+.param R2_val = { R1_val * Av3 }
+R1 out2_n opamp_in_minus {R1_val}
+R2 opamp_in_minus out {R2_val}
+R3 out2_p opamp_in_plus {R1_val}
+R4 opamp_in_plus gnd {R2_val}
+X_stage3 opamp_in_plus opamp_in_minus out vcc vee gnd LM358
+.ends SupOpAmp_LM358
+
+* NE5532 (Audio / Bajo Ruido)
+.subckt SupOpAmp_NE5532 in+ in- out vcc vee gnd PARAMS: Av1=10 Av2=10 Av3=10
+X_stage1 in+ in- out1_p out1_n vcc vee gnd diffdiff_NE5532 Av={Av1}
+X_stage2 out1_p out1_n out2_p out2_n vcc vee gnd diffdiff_NE5532 Av={Av2}
+.param R1_val = 10k
+.param R2_val = { R1_val * Av3 }
+R1 out2_n opamp_in_minus {R1_val}
+R2 opamp_in_minus out {R2_val}
+R3 out2_p opamp_in_plus {R1_val}
+R4 opamp_in_plus gnd {R2_val}
+X_stage3 opamp_in_plus opamp_in_minus out vcc vee gnd NE5532
+.ends SupOpAmp_NE5532
+
+* MCP601 (Rail-to-Rail)
+.subckt SupOpAmp_MCP601 in+ in- out vcc vee gnd PARAMS: Av1=10 Av2=10 Av3=10
+X_stage1 in+ in- out1_p out1_n vcc vee gnd diffdiff_MCP601 Av={Av1}
+X_stage2 out1_p out1_n out2_p out2_n vcc vee gnd diffdiff_MCP601 Av={Av2}
+.param R1_val = 10k
+.param R2_val = { R1_val * Av3 }
+R1 out2_n opamp_in_minus {R1_val}
+R2 opamp_in_minus out {R2_val}
+R3 out2_p opamp_in_plus {R1_val}
+R4 opamp_in_plus gnd {R2_val}
+X_stage3 opamp_in_plus opamp_in_minus out vcc vee gnd MCP601
+.ends SupOpAmp_MCP601
+
+* OP07 (Precisión)
+.subckt SupOpAmp_OP07 in+ in- out vcc vee gnd PARAMS: Av1=10 Av2=10 Av3=10
+X_stage1 in+ in- out1_p out1_n vcc vee gnd diffdiff_OP07 Av={Av1}
+X_stage2 out1_p out1_n out2_p out2_n vcc vee gnd diffdiff_OP07 Av={Av2}
+.param R1_val = 10k
+.param R2_val = { R1_val * Av3 }
+R1 out2_n opamp_in_minus {R1_val}
+R2 opamp_in_minus out {R2_val}
+R3 out2_p opamp_in_plus {R1_val}
+R4 opamp_in_plus gnd {R2_val}
+X_stage3 opamp_in_plus opamp_in_minus out vcc vee gnd OP07
+.ends SupOpAmp_OP07
+
+* OP27 (Precisión / Bajo Ruido)
+.subckt SupOpAmp_OP27 in+ in- out vcc vee gnd PARAMS: Av1=10 Av2=10 Av3=10
+X_stage1 in+ in- out1_p out1_n vcc vee gnd diffdiff_OP27 Av={Av1}
+X_stage2 out1_p out1_n out2_p out2_n vcc vee gnd diffdiff_OP27 Av={Av2}
+.param R1_val = 10k
+.param R2_val = { R1_val * Av3 }
+R1 out2_n opamp_in_minus {R1_val}
+R2 opamp_in_minus out {R2_val}
+R3 out2_p opamp_in_plus {R1_val}
+R4 opamp_in_plus gnd {R2_val}
+X_stage3 opamp_in_plus opamp_in_minus out vcc vee gnd OP27
+.ends SupOpAmp_OP27
+
+* AD8628 (Precisión Zero-Drift)
+.subckt SupOpAmp_AD8628 in+ in- out vcc vee gnd PARAMS: Av1=10 Av2=10 Av3=10
+X_stage1 in+ in- out1_p out1_n vcc vee gnd diffdiff_AD8628 Av={Av1}
+X_stage2 out1_p out1_n out2_p out2_n vcc vee gnd diffdiff_AD8628 Av={Av2}
+.param R1_val = 10k
+.param R2_val = { R1_val * Av3 }
+R1 out2_n opamp_in_minus {R1_val}
+R2 opamp_in_minus out {R2_val}
+R3 out2_p opamp_in_plus {R1_val}
+R4 opamp_in_plus gnd {R2_val}
+X_stage3 opamp_in_plus opamp_in_minus out vcc vee gnd AD8628
+.ends SupOpAmp_AD8628
+
+* LT1028 (Ultra Bajo Ruido)
+.subckt SupOpAmp_LT1028 in+ in- out vcc vee gnd PARAMS: Av1=10 Av2=10 Av3=10
+X_stage1 in+ in- out1_p out1_n vcc vee gnd diffdiff_LT1028 Av={Av1}
+X_stage2 out1_p out1_n out2_p out2_n vcc vee gnd diffdiff_LT1028 Av={Av2}
+.param R1_val = 10k
+.param R2_val = { R1_val * Av3 }
+R1 out2_n opamp_in_minus {R1_val}
+R2 opamp_in_minus out {R2_val}
+R3 out2_p opamp_in_plus {R1_val}
+R4 opamp_in_plus gnd {R2_val}
+X_stage3 opamp_in_plus opamp_in_minus out vcc vee gnd LT1028
+.ends SupOpAmp_LT1028
+
+* AD797 (Ultra Bajo Ruido)
+.subckt SupOpAmp_AD797 in+ in- out vcc vee gnd PARAMS: Av1=10 Av2=10 Av3=10
+X_stage1 in+ in- out1_p out1_n vcc vee gnd diffdiff_AD797 Av={Av1}
+X_stage2 out1_p out1_n out2_p out2_n vcc vee gnd diffdiff_AD797 Av={Av2}
+.param R1_val = 10k
+.param R2_val = { R1_val * Av3 }
+R1 out2_n opamp_in_minus {R1_val}
+R2 opamp_in_minus out {R2_val}
+R3 out2_p opamp_in_plus {R1_val}
+R4 opamp_in_plus gnd {R2_val}
+X_stage3 opamp_in_plus opamp_in_minus out vcc vee gnd AD797
+.ends SupOpAmp_AD797
+
+* OPA2134 (Audio de Alta Fidelidad)
+.subckt SupOpAmp_OPA2134 in+ in- out vcc vee gnd PARAMS: Av1=10 Av2=10 Av3=10
+X_stage1 in+ in- out1_p out1_n vcc vee gnd diffdiff_OPA2134 Av={Av1}
+X_stage2 out1_p out1_n out2_p out2_n vcc vee gnd diffdiff_OPA2134 Av={Av2}
+.param R1_val = 10k
+.param R2_val = { R1_val * Av3 }
+R1 out2_n opamp_in_minus {R1_val}
+R2 opamp_in_minus out {R2_val}
+R3 out2_p opamp_in_plus {R1_val}
+R4 opamp_in_plus gnd {R2_val}
+X_stage3 opamp_in_plus opamp_in_minus out vcc vee gnd OPA2134
+.ends SupOpAmp_OPA2134
+
+* AD8009 (Alta Velocidad >100MHz)
+.subckt SupOpAmp_AD8009 in+ in- out vcc vee gnd PARAMS: Av1=10 Av2=10 Av3=10
+X_stage1 in+ in- out1_p out1_n vcc vee gnd diffdiff_AD8009 Av={Av1}
+X_stage2 out1_p out1_n out2_p out2_n vcc vee gnd diffdiff_AD8009 Av={Av2}
+.param R1_val = 10k
+.param R2_val = { R1_val * Av3 }
+R1 out2_n opamp_in_minus {R1_val}
+R2 opamp_in_minus out {R2_val}
+R3 out2_p opamp_in_plus {R1_val}
+R4 opamp_in_plus gnd {R2_val}
+X_stage3 opamp_in_plus opamp_in_minus out vcc vee gnd AD8009
+.ends SupOpAmp_AD8009
+
+* LMH6702 (Alta Velocidad >100MHz)
+.subckt SupOpAmp_LMH6702 in+ in- out vcc vee gnd PARAMS: Av1=10 Av2=10 Av3=10
+X_stage1 in+ in- out1_p out1_n vcc vee gnd diffdiff_LMH6702 Av={Av1}
+X_stage2 out1_p out1_n out2_p out2_n vcc vee gnd diffdiff_LMH6702 Av={Av2}
+.param R1_val = 10k
+.param R2_val = { R1_val * Av3 }
+R1 out2_n opamp_in_minus {R1_val}
+R2 opamp_in_minus out {R2_val}
+R3 out2_p opamp_in_plus {R1_val}
+R4 opamp_in_plus gnd {R2_val}
+X_stage3 opamp_in_plus opamp_in_minus out vcc vee gnd LMH6702
+.ends SupOpAmp_LMH6702
+
+* THS3001 (Alta Velocidad >100MHz)
+.subckt SupOpAmp_THS3001 in+ in- out vcc vee gnd PARAMS: Av1=10 Av2=10 Av3=10
+X_stage1 in+ in- out1_p out1_n vcc vee gnd diffdiff_THS3001 Av={Av1}
+X_stage2 out1_p out1_n out2_p out2_n vcc vee gnd diffdiff_THS3001 Av={Av2}
+.param R1_val = 10k
+.param R2_val = { R1_val * Av3 }
+R1 out2_n opamp_in_minus {R1_val}
+R2 opamp_in_minus out {R2_val}
+R3 out2_p opamp_in_plus {R1_val}
+R4 opamp_in_plus gnd {R2_val}
+X_stage3 opamp_in_plus opamp_in_minus out vcc vee gnd THS3001
+.ends SupOpAmp_THS3001
+
+* L272 (Alta Corriente / Potencia)
+.subckt SupOpAmp_L272 in+ in- out vcc vee gnd PARAMS: Av1=10 Av2=10 Av3=10
+X_stage1 in+ in- out1_p out1_n vcc vee gnd diffdiff_L272 Av={Av1}
+X_stage2 out1_p out1_n out2_p out2_n vcc vee gnd diffdiff_L272 Av={Av2}
+.param R1_val = 10k
+.param R2_val = { R1_val * Av3 }
+R1 out2_n opamp_in_minus {R1_val}
+R2 opamp_in_minus out {R2_val}
+R3 out2_p opamp_in_plus {R1_val}
+R4 opamp_in_plus gnd {R2_val}
+X_stage3 opamp_in_plus opamp_in_minus out vcc vee gnd L272
+.ends SupOpAmp_L272
+
+* OPA541 (Alta Corriente / Potencia)
+.subckt SupOpAmp_OPA541 in+ in- out vcc vee gnd PARAMS: Av1=10 Av2=10 Av3=10
+X_stage1 in+ in- out1_p out1_n vcc vee gnd diffdiff_OPA541 Av={Av1}
+X_stage2 out1_p out1_n out2_p out2_n vcc vee gnd diffdiff_OPA541 Av={Av2}
+.param R1_val = 10k
+.param R2_val = { R1_val * Av3 }
+R1 out2_n opamp_in_minus {R1_val}
+R2 opamp_in_minus out {R2_val}
+R3 out2_p opamp_in_plus {R1_val}
+R4 opamp_in_plus gnd {R2_val}
+X_stage3 opamp_in_plus opamp_in_minus out vcc vee gnd OPA541
+.ends SupOpAmp_OPA541
+
+* LM3886 (Audio Potencia / Alta Corriente)
+.subckt SupOpAmp_LM3886 in+ in- out vcc vee gnd PARAMS: Av1=10 Av2=10 Av3=10
+X_stage1 in+ in- out1_p out1_n vcc vee gnd diffdiff_LM3886 Av={Av1}
+X_stage2 out1_p out1_n out2_p out2_n vcc vee gnd diffdiff_LM3886 Av={Av2}
+.param R1_val = 10k
+.param R2_val = { R1_val * Av3 }
+R1 out2_n opamp_in_minus {R1_val}
+R2 opamp_in_minus out {R2_val}
+R3 out2_p opamp_in_plus {R1_val}
+R4 opamp_in_plus gnd {R2_val}
+X_stage3 opamp_in_plus opamp_in_minus out vcc vee gnd LM3886
+.ends SupOpAmp_LM3886
+
+* LT1210 (Corriente Rápida / Amplificador de Línea)
+.subckt SupOpAmp_LT1210 in+ in- out vcc vee gnd PARAMS: Av1=10 Av2=10 Av3=10
+X_stage1 in+ in- out1_p out1_n vcc vee gnd diffdiff_LT1210 Av={Av1}
+X_stage2 out1_p out1_n out2_p out2_n vcc vee gnd diffdiff_LT1210 Av={Av2}
+.param R1_val = 10k
+.param R2_val = { R1_val * Av3 }
+R1 out2_n opamp_in_minus {R1_val}
+R2 opamp_in_minus out {R2_val}
+R3 out2_p opamp_in_plus {R1_val}
+R4 opamp_in_plus gnd {R2_val}
+X_stage3 opamp_in_plus opamp_in_minus out vcc vee gnd LT1210
+.ends SupOpAmp_LT1210

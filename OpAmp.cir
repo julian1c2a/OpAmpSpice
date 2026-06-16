@@ -1,0 +1,171 @@
+* Macro modelo de Amplificador Operacional Parametrizable (con SR, GBW, Iout_max, Vos, Ib, CMRR, Fp2)
+
+* Parámetros por defecto:
+* Av: Ganancia en lazo abierto (DC)
+* GBW: Producto Ganancia-Ancho de Banda (Hz)
+* SR: Slew Rate (V/s)
+* Rin: Resistencia de entrada (Ohms)
+* Rout: Resistencia de salida (Ohms)
+* Vdrop_pos: Caída de tensión de saturación respecto a Vcc (V)
+* Vdrop_neg: Caída de tensión de saturación respecto a Vee (V)
+* Iout_max: Corriente máxima de salida (A)
+* Vos: Voltaje de offset de entrada (V)
+* Ib: Corriente de polarización de entrada (A)
+* CMRR: Rechazo al modo común (dB)
+* Fp2: Frecuencia del segundo polo (Hz)
+.subckt OpAmp in+ in- out vcc vee gnd PARAMS: Av=100k GBW=1Meg SR=1Meg Rin=10Meg Rout=100 Vdrop_pos=1.5 Vdrop_neg=1.5 Iout_max=25m Vos=1m Ib=80n CMRR=90 Fp2=2Meg
+
+* Cálculos internos para el modelo
+.param pi = 3.14159265359
+.param Gm = 1m
+.param C1_val = {Gm / (2 * pi * GBW)}
+.param R1_val = {Av / Gm}
+.param Imax = {C1_val * SR}
+.param Vmax_in = {Imax / Gm}
+.param CMRR_lin = {10**(CMRR/20)}
+
+* Voltaje de offset de entrada
+V_os in+ in_plus_offset {Vos}
+
+* Voltaje de error por Rechazo al Modo Común (CMRR)
+* Inyecta Verror = Vcm / CMRR_lin
+E_cmrr in_plus_offset in_plus_final VALUE={(v(in+) + v(in-)) / (2 * CMRR_lin)}
+
+* Corrientes de polarización de entrada
+I_b_plus in_plus_final gnd {Ib}
+I_b_minus in- gnd {Ib}
+
+* Resistencia de entrada (conecta tras los errores)
+Rin_inst in_plus_final in- {Rin}
+
+* Resistencias de polarización para caminos de continua
+Rd+ in_plus_final gnd 10T
+Rd- in- gnd 10T
+
+* Etapa de transconductancia con límite para Slew Rate
+* Limita la corriente a +/- Imax (para reproducir el Slew Rate)
+B1 preout gnd I=(v(in_plus_final, in-) > {Vmax_in}) ? {Imax} : ((v(in_plus_final, in-) < -{Vmax_in}) ? -{Imax} : v(in_plus_final, in-)*{Gm})
+
+* Polo dominante (RC)
+R1 preout gnd {R1_val}
+C1 preout gnd {C1_val}
+
+* Polo secundario (Fp2)
+* Buffer ideal para aislar el polo dominante
+E_p2 n_p2_drive gnd preout gnd 1.0
+R_p2 n_p2_drive preout2 1k
+C_p2 preout2 gnd {1 / (2 * pi * Fp2 * 1k)}
+
+* Etapa de salida con saturación de voltaje
+B2 n_vac gnd V=max(min(v(preout2), v(vcc) - {Vdrop_pos}), v(vee) + {Vdrop_neg})
+
+* Etapa de límite de corriente de salida (Transconductancia con saturación)
+* Multiplicamos por 1e6 para forzar un seguimiento ideal del voltaje n_vac, limitado por Iout_max
+B_limit n_limited gnd I=max(min((v(n_vac) - v(n_limited))*1e6, {Iout_max}), -{Iout_max})
+* Resistencia dummy para dar camino DC al nodo y estabilizar
+R_dummy n_limited gnd 1Meg
+
+* Resistencia de salida
+Rout_inst out n_limited {Rout}
+
+.ends OpAmp
+
+* ====================================================================
+* LIBRERÍA DE OPAMPS COMERCIALES PRECONFIGURADOS
+* Estos subcircuitos envuelven al modelo genérico con valores típicos
+* ====================================================================
+
+* LM741 (Propósito General)
+.subckt LM741 in+ in- out vcc vee gnd
+X1 in+ in- out vcc vee gnd OpAmp Av=2e5 GBW=1.0Meg SR=0.5Meg Rin=2e6 Rout=75 Vdrop_pos=2.0 Vdrop_neg=2.0 Iout_max=25m Vos=1m Ib=80n CMRR=90 Fp2=1.5Meg
+.ends LM741
+
+* TL081 (Propósito General JFET)
+.subckt TL081 in+ in- out vcc vee gnd
+X1 in+ in- out vcc vee gnd OpAmp Av=2e5 GBW=3Meg SR=13Meg Rin=1e12 Rout=100 Vdrop_pos=1.5 Vdrop_neg=1.5 Iout_max=20m Vos=3m Ib=30p CMRR=86 Fp2=5Meg
+.ends TL081
+
+* TL071 (Propósito General JFET, Gemelo del TL081)
+.subckt TL071 in+ in- out vcc vee gnd
+X1 in+ in- out vcc vee gnd OpAmp Av=2e5 GBW=3Meg SR=13Meg Rin=1e12 Rout=100 Vdrop_pos=1.5 Vdrop_neg=1.5 Iout_max=20m Vos=3m Ib=30p CMRR=86 Fp2=5Meg
+.ends TL071
+
+* LM358 (Fuente Simple)
+.subckt LM358 in+ in- out vcc vee gnd
+X1 in+ in- out vcc vee gnd OpAmp Av=1e5 GBW=1Meg SR=0.5Meg Rin=2e6 Rout=300 Vdrop_pos=1.5 Vdrop_neg=0.02 Iout_max=40m Vos=2m Ib=45n CMRR=80 Fp2=2Meg
+.ends LM358
+
+* NE5532 (Audio / Bajo Ruido)
+.subckt NE5532 in+ in- out vcc vee gnd
+X1 in+ in- out vcc vee gnd OpAmp Av=1e5 GBW=10Meg SR=9Meg Rin=300k Rout=100 Vdrop_pos=2.0 Vdrop_neg=2.0 Iout_max=38m Vos=0.5m Ib=200n CMRR=100 Fp2=20Meg
+.ends NE5532
+
+* MCP601 (Rail-to-Rail)
+.subckt MCP601 in+ in- out vcc vee gnd
+X1 in+ in- out vcc vee gnd OpAmp Av=1e4 GBW=2.8Meg SR=2.3Meg Rin=1e13 Rout=300 Vdrop_pos=0.025 Vdrop_neg=0.025 Iout_max=22m Vos=2m Ib=1p CMRR=80 Fp2=5Meg
+.ends MCP601
+
+* OP07 (Precisión)
+.subckt OP07 in+ in- out vcc vee gnd
+X1 in+ in- out vcc vee gnd OpAmp Av=5e5 GBW=0.6Meg SR=0.3Meg Rin=50Meg Rout=60 Vdrop_pos=2.0 Vdrop_neg=2.0 Iout_max=15m Vos=30u Ib=1n CMRR=110 Fp2=1.2Meg
+.ends OP07
+
+* OP27 (Precisión / Bajo Ruido)
+.subckt OP27 in+ in- out vcc vee gnd
+X1 in+ in- out vcc vee gnd OpAmp Av=1.5e6 GBW=8Meg SR=2.8Meg Rin=4Meg Rout=70 Vdrop_pos=2.0 Vdrop_neg=2.0 Iout_max=20m Vos=25u Ib=15n CMRR=114 Fp2=15Meg
+.ends OP27
+
+* AD8628 (Precisión Zero-Drift)
+.subckt AD8628 in+ in- out vcc vee gnd
+X1 in+ in- out vcc vee gnd OpAmp Av=3e6 GBW=2.5Meg SR=1Meg Rin=1e12 Rout=100 Vdrop_pos=0.01 Vdrop_neg=0.01 Iout_max=30m Vos=1u Ib=30p CMRR=120 Fp2=5Meg
+.ends AD8628
+
+* LT1028 (Ultra Bajo Ruido)
+.subckt LT1028 in+ in- out vcc vee gnd
+X1 in+ in- out vcc vee gnd OpAmp Av=7e6 GBW=75Meg SR=11Meg Rin=1G Rout=40 Vdrop_pos=1.5 Vdrop_neg=1.5 Iout_max=30m Vos=20u Ib=25n CMRR=120 Fp2=150Meg
+.ends LT1028
+
+* AD797 (Ultra Bajo Ruido)
+.subckt AD797 in+ in- out vcc vee gnd
+X1 in+ in- out vcc vee gnd OpAmp Av=1e6 GBW=110Meg SR=20Meg Rin=100Meg Rout=50 Vdrop_pos=1.5 Vdrop_neg=1.5 Iout_max=50m Vos=40u Ib=250n CMRR=120 Fp2=220Meg
+.ends AD797
+
+* OPA2134 (Audio de Alta Fidelidad)
+.subckt OPA2134 in+ in- out vcc vee gnd
+X1 in+ in- out vcc vee gnd OpAmp Av=1e6 GBW=8Meg SR=20Meg Rin=1e13 Rout=10 Vdrop_pos=1.2 Vdrop_neg=1.2 Iout_max=35m Vos=0.5m Ib=5p CMRR=100 Fp2=16Meg
+.ends OPA2134
+
+* AD8009 (Alta Velocidad >100MHz)
+.subckt AD8009 in+ in- out vcc vee gnd
+X1 in+ in- out vcc vee gnd OpAmp Av=3e3 GBW=1000Meg SR=5500Meg Rin=500k Rout=15 Vdrop_pos=1.5 Vdrop_neg=1.5 Iout_max=175m Vos=2m Ib=50u CMRR=80 Fp2=2000Meg
+.ends AD8009
+
+* LMH6702 (Alta Velocidad >100MHz)
+.subckt LMH6702 in+ in- out vcc vee gnd
+X1 in+ in- out vcc vee gnd OpAmp Av=5e3 GBW=1700Meg SR=3100Meg Rin=1Meg Rout=15 Vdrop_pos=1.2 Vdrop_neg=1.2 Iout_max=80m Vos=1m Ib=15u CMRR=80 Fp2=3000Meg
+.ends LMH6702
+
+* THS3001 (Alta Velocidad >100MHz)
+.subckt THS3001 in+ in- out vcc vee gnd
+X1 in+ in- out vcc vee gnd OpAmp Av=1e4 GBW=420Meg SR=6500Meg Rin=1Meg Rout=10 Vdrop_pos=1.5 Vdrop_neg=1.5 Iout_max=100m Vos=1m Ib=2u CMRR=80 Fp2=1000Meg
+.ends THS3001
+
+* L272 (Alta Corriente / Potencia)
+.subckt L272 in+ in- out vcc vee gnd
+X1 in+ in- out vcc vee gnd OpAmp Av=5e4 GBW=0.3Meg SR=1Meg Rin=100k Rout=1 Vdrop_pos=1.5 Vdrop_neg=1.5 Iout_max=1000m Vos=10m Ib=1u CMRR=70 Fp2=1Meg
+.ends L272
+
+* OPA541 (Alta Corriente / Potencia)
+.subckt OPA541 in+ in- out vcc vee gnd
+X1 in+ in- out vcc vee gnd OpAmp Av=5e4 GBW=1.6Meg SR=10Meg Rin=1e11 Rout=0.1 Vdrop_pos=3.5 Vdrop_neg=3.5 Iout_max=5000m Vos=1m Ib=40p CMRR=90 Fp2=3Meg
+.ends OPA541
+
+* LM3886 (Audio Potencia / Alta Corriente)
+.subckt LM3886 in+ in- out vcc vee gnd
+X1 in+ in- out vcc vee gnd OpAmp Av=1e5 GBW=8Meg SR=19Meg Rin=2Meg Rout=0.1 Vdrop_pos=3.0 Vdrop_neg=3.0 Iout_max=7000m Vos=1m Ib=0.2u CMRR=110 Fp2=20Meg
+.ends LM3886
+
+* LT1210 (Corriente Rápida / Amplificador de Línea)
+.subckt LT1210 in+ in- out vcc vee gnd
+X1 in+ in- out vcc vee gnd OpAmp Av=1e4 GBW=35Meg SR=900Meg Rin=1Meg Rout=10 Vdrop_pos=1.5 Vdrop_neg=1.5 Iout_max=1100m Vos=3m Ib=1u CMRR=80 Fp2=100Meg
+.ends LT1210

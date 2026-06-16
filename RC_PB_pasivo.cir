@@ -1,0 +1,17 @@
+* Librería de Filtros RC Pasivos
+
+* Subcircuito Filtro RC Paso Bajo
+* Nodos: Entrada (in), Salida (out), Referencia (ref)
+* Parámetros por defecto si no se especifican: R=10k, C=10u
+.subckt rc_paso_bajo in out ref R_val=10k C_val=10u
+R1 in out {R_val}
+C1 out ref {C_val}
+.ends rc_paso_bajo
+
+* Subcircuito Filtro RC Paso Alto
+* Nodos: Entrada (in), Salida (out), Referencia (ref)
+* Parámetros por defecto si no se especifican: R=10k, C=10u
+.subckt rc_paso_alto in out ref R_val=10k C_val=10u
+C1 in out {C_val}
+R1 out ref {R_val}
+.ends rc_paso_alto

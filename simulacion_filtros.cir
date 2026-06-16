@@ -1,0 +1,26 @@
+* Simulacion de Filtros usando Subcircuitos
+
+* 1. Incluir el archivo donde están definidos los subcircuitos
+.include RC_PB_pasivo.cir
+
+* 2. Fuente de voltaje en alterna (AC) de amplitud 1V
+Vin in 0 AC 1
+
+* 3. Instanciar el filtro paso bajo con valores personalizados
+* Orden de los nodos según definimos: Entrada Salida Referencia
+* Le pasamos R_val=1k y C_val=1u (Frecuencia de corte = 159 Hz)
+X1 in out_pb 0 rc_paso_bajo R_val=500k C_val=2u
+
+* 4. Instanciar el filtro paso alto con otros valores
+* Le pasamos R_val=50k y C_val=100n (Frecuencia de corte = 31.8 Hz)
+X2 in out_pa 0 rc_paso_alto R_val=50k C_val=100n
+
+.options savecurrents
+
+* Bloque de control para Análisis AC (Frecuencia)
+.control
+    ac dec 50 0.01 1k
+    plot vdb(out_pb) vdb(out_pa)
+.endc
+
+.end

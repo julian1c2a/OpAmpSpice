@@ -1,7 +1,13 @@
 import numpy as np
 import matplotlib.pyplot as plt
+import subprocess  # <--- IMPORTANTE AÑADIR ESTO
 
-# Cargar los datos
+# 1. Ejecutar ngspice en modo batch (-b) para que no abra su propia consola
+print("Ejecutando simulación en ngspice...")
+subprocess.run(["ngspice", "-b", "RC_simple.cir"], check=True)
+print("Simulación completada. Generando gráfica...")
+
+# 2. Cargar los datos (el resto del código sigue igual)
 datos = np.loadtxt('datos_rc.txt')
 
 # Extraer las columnas (ngspice repite el tiempo por cada variable)
@@ -35,6 +41,15 @@ ax1.text(tau, 1, ' 1 $\\tau$', color='red')
 
 ax1.axvline(x=2*tau, color='orange', linestyle='--')
 ax1.text(2*tau, 1, ' 2 $\\tau$', color='orange')
+
+ax1.axvline(x=3*tau, color='yellow', linestyle='--')
+ax1.text(3*tau, 1, ' 3 $\\tau$', color='yellow')
+
+ax1.axvline(x=4*tau, color='pink', linestyle='--')
+ax1.text(4*tau, 1, ' 4 $\\tau$', color='pink')
+
+ax1.axvline(x=5*tau, color='green', linestyle='--')
+ax1.text(5*tau, 1, ' 5 $\\tau$', color='green')
 
 # Juntar las leyendas de ambos ejes
 lines_1, labels_1 = ax1.get_legend_handles_labels()

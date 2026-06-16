@@ -30,7 +30,7 @@ C1 out gnd 10u IC=0
     
     * 2. Análisis transitorio (paso, tiempo_final, tiempo_inicio, paso_subida, uic para usar el IC=0)
     * Vamos a simular hasta 100ms con pasos de 0.1ms, sin permitir que el paso de simulación sea menor a 0.5ms, guardando desde el instante 0ms.
-    tran 0.1m 500m 0m 0.5m uic
+    tran 0.1m 600m 0m 0.5m uic
     * Graficar el voltaje de entrada y el del condensador (salida)
     wrdata datos_rc.txt V(in) V(out) @R1[i]
 .endc

@@ -1,80 +1,12 @@
-* Testbench para comparar el comportamiento de los SupOpAmps
-* Ganancia configurada: Av1=25, Av2=25, Av3=10 -> Ganancia Total = 6250 (aprox 75.9 dB)
-
+* Test for SupOpAmp.cir
 .include SupOpAmp.cir
 
-* =======================================================
-* FUENTES DE ALIMENTACIÓN Y SEÑAL
-* =======================================================
-* Alimentación simétrica estándar
-Vcc vcc 0 DC 15V
-Vee vee 0 DC -15V
+Vcc vcc 0 15
+Vee vee 0 -15
+Vin in 0 1m
 
-* Entrada diferencial. 
-* Ponemos in- a masa y aplicamos la señal en in+
-V_in_minus in- 0 DC 0
-* Usamos una señal de AC 1V para ver la ganancia directa en el diagrama de Bode
-* Y un seno de 1mV a 1kHz para el análisis Transitorio (1mV * 6250 = 6.25V en salida)
-V_in_plus in+ 0 DC 0 AC 1 SIN(0 1mV 1k)
+Xtest in 0 out vcc vee 0 SupOpAmp
 
-* =======================================================
-* INSTANCIAS DE PRUEBA (Av1=25, Av2=25, Av3=10)
-* =======================================================
-* 0. Modelo Ideal (como referencia absoluta)
-X0 in+ in- out_ideal vcc vee 0 SupOpAmp Av1=25 Av2=25 Av3=10
-
-* 1. Propósito General
-X1 in+ in- out_LM741 vcc vee 0 SupOpAmp_LM741 Av1=25 Av2=25 Av3=10
-X2 in+ in- out_TL081 vcc vee 0 SupOpAmp_TL081 Av1=25 Av2=25 Av3=10
-X3 in+ in- out_TL071 vcc vee 0 SupOpAmp_TL071 Av1=25 Av2=25 Av3=10
-X4 in+ in- out_LM358 vcc vee 0 SupOpAmp_LM358 Av1=25 Av2=25 Av3=10
-
-* 2. Precisión / Audio / Bajo Ruido
-X5 in+ in- out_NE5532 vcc vee 0 SupOpAmp_NE5532 Av1=25 Av2=25 Av3=10
-X6 in+ in- out_OP07 vcc vee 0 SupOpAmp_OP07 Av1=25 Av2=25 Av3=10
-X7 in+ in- out_OP27 vcc vee 0 SupOpAmp_OP27 Av1=25 Av2=25 Av3=10
-X8 in+ in- out_AD8628 vcc vee 0 SupOpAmp_AD8628 Av1=25 Av2=25 Av3=10
-X9 in+ in- out_LT1028 vcc vee 0 SupOpAmp_LT1028 Av1=25 Av2=25 Av3=10
-X10 in+ in- out_AD797 vcc vee 0 SupOpAmp_AD797 Av1=25 Av2=25 Av3=10
-X11 in+ in- out_OPA2134 vcc vee 0 SupOpAmp_OPA2134 Av1=25 Av2=25 Av3=10
-
-* 3. Especiales (Rail-to-Rail, Alta Velocidad, Potencia)
-X12 in+ in- out_MCP601 vcc vee 0 SupOpAmp_MCP601 Av1=25 Av2=25 Av3=10
-X13 in+ in- out_AD8009 vcc vee 0 SupOpAmp_AD8009 Av1=25 Av2=25 Av3=10
-X14 in+ in- out_LMH6702 vcc vee 0 SupOpAmp_LMH6702 Av1=25 Av2=25 Av3=10
-X15 in+ in- out_THS3001 vcc vee 0 SupOpAmp_THS3001 Av1=25 Av2=25 Av3=10
-X16 in+ in- out_L272 vcc vee 0 SupOpAmp_L272 Av1=25 Av2=25 Av3=10
-X17 in+ in- out_OPA541 vcc vee 0 SupOpAmp_OPA541 Av1=25 Av2=25 Av3=10
-X18 in+ in- out_LM3886 vcc vee 0 SupOpAmp_LM3886 Av1=25 Av2=25 Av3=10
-X19 in+ in- out_LT1210 vcc vee 0 SupOpAmp_LT1210 Av1=25 Av2=25 Av3=10
-
-* =======================================================
-* ANÁLISIS Y GRÁFICAS
-* =======================================================
-.control
-  * 1. Análisis en Frecuencia (AC) de 1 Hz a 100 MHz
-  ac dec 50 1 100Meg
-  
-  * Para no sobrecargar la vista, graficamos por grupos (Ganancia en dB)
-  * Se espera que a bajas frecuencias la ganancia ronde los 75.9 dB (20*log10(6250))
-  
-  * Grafica 1: Comparativa Clásicos vs Ideal
-  plot vdb(out_ideal) vdb(out_LM741) vdb(out_LM358) vdb(out_TL081) title "Respuesta AC - Clasicos Generales"
-  
-  * Grafica 2: Precisión e Instrumentación
-  plot vdb(out_ideal) vdb(out_OP07) vdb(out_OP27) vdb(out_LT1028) vdb(out_AD797) title "Respuesta AC - Modelos de Precision"
-  
-  * Grafica 3: Alta Velocidad (Se acercarán más al modelo ideal en altas frecuencias)
-  plot vdb(out_ideal) vdb(out_AD8009) vdb(out_LMH6702) vdb(out_THS3001) vdb(out_LT1210) title "Respuesta AC - Alta Velocidad"
-
-  * 2. Análisis Transitorio en el Tiempo
-  * 3 milisegundos para ver 3 ciclos completos del seno de 1kHz
-  tran 10u 3m
-  
-  * En el tiempo, la onda debería medir ~6.25V de amplitud. 
-  * Veremos el comportamiento de distorsión o lentitud si el Slew Rate o GBW fallan.
-  plot v(out_ideal) v(out_LM741) v(out_OP07) v(out_AD8009) title "Salida en el Tiempo (1kHz 1mV_in)"
-
-.endc
-
+.op
+.print op v(out)
 .end

@@ -44,7 +44,7 @@ Rd- in- gnd 10T
 
 * Etapa de transconductancia con límite para Slew Rate
 * Limita la corriente a +/- Imax (para reproducir el Slew Rate)
-B1 preout gnd I=(v(in_plus_final, in-) > {Vmax_in}) ? {Imax} : ((v(in_plus_final, in-) < -{Vmax_in}) ? -{Imax} : v(in_plus_final, in-)*{Gm})
+B1 gnd preout I=(v(in_plus_final, in-) > {Vmax_in}) ? {Imax} : ((v(in_plus_final, in-) < -{Vmax_in}) ? -{Imax} : v(in_plus_final, in-)*{Gm})
 
 * Polo dominante (RC)
 R1 preout gnd {R1_val}

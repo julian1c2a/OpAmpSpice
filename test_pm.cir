@@ -1,0 +1,18 @@
+* Analisis de Margen de Fase
+.include SupOpAmp.cir
+
+Vcc vcc 0 15
+Vee vee 0 -15
+Vin in 0 AC 1
+
+X0 in 0 out0 vcc vee 0 SupOpAmp_LM741 Av1=58.48 Av2=58.48 Av3=58.48
+X1 in 0 out1 vcc vee 0 SupOpAmp_LM741 Av1=2000 Av2=10 Av3=10
+X2 in 0 out2 vcc vee 0 SupOpAmp_LM741 Av1=20000 Av2=3.16 Av3=3.16
+X3 in 0 out3 vcc vee 0 SupOpAmp_LM741 Av1=10 Av2=10 Av3=2000
+
+.control
+ac dec 100 1 100Meg
+wrdata pm_data.txt vdb(out0) vp(out0) vdb(out1) vp(out1) vdb(out2) vp(out2) vdb(out3) vp(out3)
+
+.endc
+.end

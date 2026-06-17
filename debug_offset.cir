@@ -1,0 +1,13 @@
+* Debug DC Offset
+.include SupOpAmp.cir
+Vcc vcc 0 15
+Vee vee 0 -15
+Vin in 0 DC 0
+
+Xtest in 0 out vcc vee 0 SupOpAmp
+
+.control
+op
+print all
+.endc
+.end

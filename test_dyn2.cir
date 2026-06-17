@@ -1,0 +1,65 @@
+* Dynamic Analysis of SupOpAmps
+.include SupOpAmp.cir
+
+Vcc vcc 0 15
+Vee vee 0 -15
+Vin in 0 DC 0 AC 1 pulse(-5 5 10u 10n 10n 40u 100u)
+
+X0 in 0 out0 vcc vee 0 SupOpAmp
+X1 in 0 out1 vcc vee 0 SupOpAmp_LM741
+X2 in 0 out2 vcc vee 0 SupOpAmp_TL081
+X3 in 0 out3 vcc vee 0 SupOpAmp_TL071
+X4 in 0 out4 vcc vee 0 SupOpAmp_LM358
+X5 in 0 out5 vcc vee 0 SupOpAmp_NE5532
+X6 in 0 out6 vcc vee 0 SupOpAmp_MCP601
+X7 in 0 out7 vcc vee 0 SupOpAmp_OP07
+X8 in 0 out8 vcc vee 0 SupOpAmp_OP27
+X9 in 0 out9 vcc vee 0 SupOpAmp_AD8628
+X10 in 0 out10 vcc vee 0 SupOpAmp_LT1028
+X11 in 0 out11 vcc vee 0 SupOpAmp_AD797
+X12 in 0 out12 vcc vee 0 SupOpAmp_OPA2134
+X13 in 0 out13 vcc vee 0 SupOpAmp_AD8009
+X14 in 0 out14 vcc vee 0 SupOpAmp_LMH6702
+X15 in 0 out15 vcc vee 0 SupOpAmp_THS3001
+X16 in 0 out16 vcc vee 0 SupOpAmp_L272
+X17 in 0 out17 vcc vee 0 SupOpAmp_OPA541
+X18 in 0 out18 vcc vee 0 SupOpAmp_LM3886
+X19 in 0 out19 vcc vee 0 SupOpAmp_LT1210
+
+.control
+* 1. DC Operating Point (Offset)
+op
+wrdata offset_data.txt v(out0) v(out1) v(out2) v(out3) v(out4) v(out5) v(out6) v(out7) v(out8) v(out9) v(out10) v(out11) v(out12) v(out13) v(out14) v(out15) v(out16) v(out17) v(out18) v(out19)
+
+* 2. AC Analysis
+ac dec 100 1 100Meg
+wrdata ac_data.txt vdb(out0) vp(out0) vdb(out1) vp(out1) vdb(out2) vp(out2) vdb(out3) vp(out3) vdb(out4) vp(out4) vdb(out5) vp(out5) vdb(out6) vp(out6) vdb(out7) vp(out7) vdb(out8) vp(out8) vdb(out9) vp(out9) vdb(out10) vp(out10) vdb(out11) vp(out11) vdb(out12) vp(out12) vdb(out13) vp(out13) vdb(out14) vp(out14) vdb(out15) vp(out15) vdb(out16) vp(out16) vdb(out17) vp(out17) vdb(out18) vp(out18) vdb(out19) vp(out19)
+
+* 3. Transient Analysis (Slew Rate)
+* Ponemos SupOpAmps en modo seguidor (realimentacion total) para Slew Rate realista
+X_tran0 in out_tran0 out_tran0 vcc vee 0 SupOpAmp
+X_tran1 in out_tran1 out_tran1 vcc vee 0 SupOpAmp_LM741
+X_tran2 in out_tran2 out_tran2 vcc vee 0 SupOpAmp_TL081
+X_tran3 in out_tran3 out_tran3 vcc vee 0 SupOpAmp_TL071
+X_tran4 in out_tran4 out_tran4 vcc vee 0 SupOpAmp_LM358
+X_tran5 in out_tran5 out_tran5 vcc vee 0 SupOpAmp_NE5532
+X_tran6 in out_tran6 out_tran6 vcc vee 0 SupOpAmp_MCP601
+X_tran7 in out_tran7 out_tran7 vcc vee 0 SupOpAmp_OP07
+X_tran8 in out_tran8 out_tran8 vcc vee 0 SupOpAmp_OP27
+X_tran9 in out_tran9 out_tran9 vcc vee 0 SupOpAmp_AD8628
+X_tran10 in out_tran10 out_tran10 vcc vee 0 SupOpAmp_LT1028
+X_tran11 in out_tran11 out_tran11 vcc vee 0 SupOpAmp_AD797
+X_tran12 in out_tran12 out_tran12 vcc vee 0 SupOpAmp_OPA2134
+X_tran13 in out_tran13 out_tran13 vcc vee 0 SupOpAmp_AD8009
+X_tran14 in out_tran14 out_tran14 vcc vee 0 SupOpAmp_LMH6702
+X_tran15 in out_tran15 out_tran15 vcc vee 0 SupOpAmp_THS3001
+X_tran16 in out_tran16 out_tran16 vcc vee 0 SupOpAmp_L272
+X_tran17 in out_tran17 out_tran17 vcc vee 0 SupOpAmp_OPA541
+X_tran18 in out_tran18 out_tran18 vcc vee 0 SupOpAmp_LM3886
+X_tran19 in out_tran19 out_tran19 vcc vee 0 SupOpAmp_LT1210
+
+tran 50n 60u
+wrdata tran_data.txt v(out_tran0) v(out_tran1) v(out_tran2) v(out_tran3) v(out_tran4) v(out_tran5) v(out_tran6) v(out_tran7) v(out_tran8) v(out_tran9) v(out_tran10) v(out_tran11) v(out_tran12) v(out_tran13) v(out_tran14) v(out_tran15) v(out_tran16) v(out_tran17) v(out_tran18) v(out_tran19)
+
+.endc
+.end

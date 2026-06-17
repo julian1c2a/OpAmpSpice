@@ -1,0 +1,31 @@
+* DC Offset Test
+.include SupOpAmp.cir
+Vcc vcc 0 15
+Vee vee 0 -15
+Vin in 0 DC 0
+
+X0 in 0 out0 vcc vee 0 SupOpAmp
+X1 in 0 out1 vcc vee 0 SupOpAmp_LM741
+X2 in 0 out2 vcc vee 0 SupOpAmp_TL081
+X3 in 0 out3 vcc vee 0 SupOpAmp_TL071
+X4 in 0 out4 vcc vee 0 SupOpAmp_LM358
+X5 in 0 out5 vcc vee 0 SupOpAmp_NE5532
+X6 in 0 out6 vcc vee 0 SupOpAmp_MCP601
+X7 in 0 out7 vcc vee 0 SupOpAmp_OP07
+X8 in 0 out8 vcc vee 0 SupOpAmp_OP27
+X9 in 0 out9 vcc vee 0 SupOpAmp_AD8628
+X10 in 0 out10 vcc vee 0 SupOpAmp_LT1028
+X11 in 0 out11 vcc vee 0 SupOpAmp_AD797
+X12 in 0 out12 vcc vee 0 SupOpAmp_OPA2134
+X13 in 0 out13 vcc vee 0 SupOpAmp_AD8009
+X14 in 0 out14 vcc vee 0 SupOpAmp_LMH6702
+X15 in 0 out15 vcc vee 0 SupOpAmp_THS3001
+X16 in 0 out16 vcc vee 0 SupOpAmp_L272
+X17 in 0 out17 vcc vee 0 SupOpAmp_OPA541
+X18 in 0 out18 vcc vee 0 SupOpAmp_LM3886
+X19 in 0 out19 vcc vee 0 SupOpAmp_LT1210
+.control
+op
+print v(out0) v(out1) v(out2) v(out3) v(out4) v(out5) v(out6) v(out7) v(out8) v(out9) v(out10) v(out11) v(out12) v(out13) v(out14) v(out15) v(out16) v(out17) v(out18) v(out19)
+.endc
+.end

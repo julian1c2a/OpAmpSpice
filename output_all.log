@@ -1,0 +1,62 @@
+Error opening code model "/C"
+: No se puede encontrar el módulo especificado.
+
+Error: Library /C couldn't be loaded!
+Error opening code model "/C"
+: No se puede encontrar el módulo especificado.
+
+Error: Library /C couldn't be loaded!
+Error opening code model "/C"
+: No se puede encontrar el módulo especificado.
+
+Error: Library /C couldn't be loaded!
+Error opening code model "/C"
+: No se puede encontrar el módulo especificado.
+
+Error: Library /C couldn't be loaded!
+Error opening code model "/C"
+: No se puede encontrar el módulo especificado.
+
+Error: Library /C couldn't be loaded!
+Error opening code model "/C"
+: No se puede encontrar el módulo especificado.
+
+Error: Library /C couldn't be loaded!
+Error opening code model "/C"
+: No se puede encontrar el módulo especificado.
+
+Error: Library /C couldn't be loaded!
+
+Note: No compatibility mode selected!
+
+
+Circuit: * test all supopamps
+
+Doing analysis at TEMP = 27.000000 and TNOM = 27.000000
+
+Using SPARSE 1.3 as Direct Linear Solver
+Note: Starting dynamic gmin stepping
+Note: Dynamic gmin stepping completed
+
+No. of Data Rows : 1
+v(out0) = -1.34878e+01
+v(out1) = -1.29994e+01
+v(out2) = -1.34878e+01
+v(out3) = -1.34878e+01
+v(out4) = -1.49394e+01
+v(out5) = -1.29882e+01
+v(out6) = -1.49344e+01
+v(out7) = -1.29996e+01
+v(out8) = -1.29995e+01
+v(out9) = -1.49889e+01
+v(out10) = -1.34998e+01
+v(out11) = -1.34997e+01
+v(out12) = -1.37988e+01
+v(out13) = -1.34982e+01
+v(out14) = -1.37981e+01
+v(out15) = -1.34988e+01
+v(out16) = -1.34999e+01
+v(out17) = -1.15000e+01
+v(out18) = -1.20000e+01
+v(out19) = -1.34988e+01
+Note: Simulation executed from .control section 

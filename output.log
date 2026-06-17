@@ -1,0 +1,560 @@
+Error opening code model "/C"
+: No se puede encontrar el módulo especificado.
+
+Error: Library /C couldn't be loaded!
+Error opening code model "/C"
+: No se puede encontrar el módulo especificado.
+
+Error: Library /C couldn't be loaded!
+Error opening code model "/C"
+: No se puede encontrar el módulo especificado.
+
+Error: Library /C couldn't be loaded!
+Error opening code model "/C"
+: No se puede encontrar el módulo especificado.
+
+Error: Library /C couldn't be loaded!
+Error opening code model "/C"
+: No se puede encontrar el módulo especificado.
+
+Error: Library /C couldn't be loaded!
+Error opening code model "/C"
+: No se puede encontrar el módulo especificado.
+
+Error: Library /C couldn't be loaded!
+Error opening code model "/C"
+: No se puede encontrar el módulo especificado.
+
+Error: Library /C couldn't be loaded!
+
+Note: No compatibility mode selected!
+
+
+Circuit: * test for supopamp.cir
+
+Doing analysis at TEMP = 27.000000 and TNOM = 27.000000
+
+Using SPARSE 1.3 as Direct Linear Solver
+Warning: can't parse 'out': ignored
+
+No. of Data Rows : 1
+	Node                                  Voltage
+	----                                  -------
+	----	-------
+	xtest.x_stage3.n_limited         -1.35000e+01
+	xtest.x_stage3.preout2           -1.59155e+04
+	xtest.x_stage3.n_p2_drive        -1.59155e+04
+	xtest.x_stage3.preout            -1.59155e+04
+	xtest.x_stage3.e_cmrr_int1       3.681684e-04
+	xtest.x_stage3.in_plus_final     1.225764e+01
+	xtest.x_stage3.in_plus_offset    1.225801e+01
+	xtest.opamp_in_plus              1.225901e+01
+	out                              -1.34755e+01
+	xtest.opamp_in_minus             1.102601e+01
+	xtest.out2_n                     1.347573e+01
+	xtest.x_stage2.xn.n_limited      1.350000e+01
+	xtest.x_stage2.xn.preout2        1.591549e+04
+	xtest.x_stage2.xn.n_p2_drive     1.591549e+04
+	xtest.x_stage2.xn.preout         1.591549e+04
+	xtest.x_stage2.inn-              1.347800e+01
+	xtest.x_stage2.xn.e_cmrr_int1    -3.41773e-07
+	xtest.x_stage2.xn.in_plus_final   -1.35006e+01
+	xtest.x_stage2.xn.in_plus_offset   -1.35006e+01
+	xtest.out2_p                     1.348694e+01
+	xtest.x_stage2.xp.n_limited      1.350000e+01
+	xtest.x_stage2.xp.preout2        1.591549e+04
+	xtest.x_stage2.xp.n_p2_drive     1.591549e+04
+	xtest.x_stage2.xp.preout         1.591549e+04
+	xtest.x_stage2.inp-              1.347912e+01
+	xtest.x_stage2.xp.e_cmrr_int1    -3.24050e-07
+	xtest.x_stage2.xp.in_plus_final   -1.35006e+01
+	xtest.x_stage2.xp.in_plus_offset   -1.35006e+01
+	xtest.out1_n                     -1.34996e+01
+	xtest.x_stage1.xn.n_limited      -1.35000e+01
+	xtest.x_stage1.xn.preout2        -1.59155e+04
+	xtest.x_stage1.xn.n_p2_drive     -1.59155e+04
+	xtest.x_stage1.xn.preout         -1.59155e+04
+	xtest.x_stage1.inn-              -1.34983e+01
+	xtest.x_stage1.xn.e_cmrr_int1    -2.13428e-04
+	xtest.x_stage1.xn.in_plus_final   -7.86572e-04
+	xtest.x_stage1.xn.in_plus_offset   -1.00000e-03
+	xtest.out1_p                     -1.34996e+01
+	xtest.x_stage1.xp.n_limited      -1.35000e+01
+	xtest.x_stage1.xp.preout2        -1.59155e+04
+	xtest.x_stage1.xp.n_p2_drive     -1.59155e+04
+	xtest.x_stage1.xp.preout         -1.59155e+04
+	xtest.x_stage1.inp-              -1.34983e+01
+	xtest.x_stage1.xp.e_cmrr_int1    -2.13412e-04
+	xtest.x_stage1.xp.in_plus_final   2.134117e-04
+	xtest.x_stage1.xp.in_plus_offset   0.000000e+00
+	in                               1.000000e-03
+	vee                              -1.50000e+01
+	vcc                              1.500000e+01
+
+	Source	Current
+	------	-------
+
+	vcc#branch                       0.000000e+00
+	vee#branch                       0.000000e+00
+	vin#branch                       -1.42986e-06
+	v.xtest.x_stage1.xp.v_os#branch   1.429855e-06
+	v.xtest.x_stage1.xn.v_os#branch   1.429755e-06
+	v.xtest.x_stage2.xp.v_os#branch   -2.61797e-06
+	v.xtest.x_stage2.xn.v_os#branch   -2.61786e-06
+	v.xtest.x_stage3.v_os#branch     2.031640e-07
+	e.xtest.x_stage1.xp.e_cmrr#branch   1.429855e-06
+	e.xtest.x_stage1.xp.e_p2#branch   0.000000e+00
+	e.xtest.x_stage1.xn.e_cmrr#branch   1.429755e-06
+	e.xtest.x_stage1.xn.e_p2#branch   0.000000e+00
+	e.xtest.x_stage2.xp.e_cmrr#branch   -2.61797e-06
+	e.xtest.x_stage2.xp.e_p2#branch   0.000000e+00
+	e.xtest.x_stage2.xn.e_cmrr#branch   -2.61786e-06
+	e.xtest.x_stage2.xn.e_p2#branch   0.000000e+00
+	e.xtest.x_stage3.e_cmrr#branch   2.031640e-07
+	e.xtest.x_stage3.e_p2#branch     0.000000e+00
+	b.xtest.x_stage1.xp.be_cmrr#branch   0.000000e+00
+	b.xtest.x_stage1.xp.b2#branch    3.887781e-06
+	b.xtest.x_stage1.xn.be_cmrr#branch   0.000000e+00
+	b.xtest.x_stage1.xn.b2#branch    3.887669e-06
+	b.xtest.x_stage2.xp.be_cmrr#branch   0.000000e+00
+	b.xtest.x_stage2.xp.b2#branch    -1.30615e-04
+	b.xtest.x_stage2.xn.be_cmrr#branch   0.000000e+00
+	b.xtest.x_stage2.xn.b2#branch    -2.42706e-04
+	b.xtest.x_stage3.be_cmrr#branch   0.000000e+00
+	b.xtest.x_stage3.b2#branch       2.450151e-04
+
+ Capacitor models (Fixed capacitor)
+      model                     C
+
+        cap                     0
+         cj                     0
+       cjsw                     0
+       defw                 1e-05
+       defl                     0
+     narrow                     0
+      short                     0
+        del                     0
+        tc1                     0
+        tc2                     0
+         di                     0
+      thick                     0
+     bv_max                 1e+99
+
+ Resistor models (Simple linear resistor)
+      model                     R
+
+        rsh                     0
+     narrow                     0
+      short                     0
+        tc1                     0
+        tc2                     0
+        tce                     0
+       defw                 1e-05
+          l                 1e-05
+         kf                     0
+         af                     0
+          r                     0
+     bv_max                 1e+99
+         lf                     1
+         wf                     1
+         ef                     1
+
+ ASRC: Arbitrary Source 
+     device   b.xtest.x_stage3.b2   b.xtest.x_stage3.b1 b.xtest.x_stage3.be_c
+      dtemp                     0                     0                     0
+          i           0.000245015           0.000159155                     0
+          v                 -13.5              -15915.5           0.000368168
+   pos_node                    49                    46                    45
+   neg_node                     0                     0                     0
+
+ ASRC: Arbitrary Source 
+     device b.xtest.x_stage2.xn.b b.xtest.x_stage2.xn.b b.xtest.x_stage2.xn.b
+      dtemp                     0                     0                     0
+          i          -0.000242706          -0.000159155                     0
+          v                  13.5               15915.5          -3.41773e-07
+   pos_node                    38                    35                    33
+   neg_node                     0                     0                     0
+
+ ASRC: Arbitrary Source 
+     device b.xtest.x_stage2.xp.b b.xtest.x_stage2.xp.b b.xtest.x_stage2.xp.b
+      dtemp                     0                     0                     0
+          i          -0.000130615          -0.000159155                     0
+          v                  13.5               15915.5           -3.2405e-07
+   pos_node                    29                    26                    24
+   neg_node                     0                     0                     0
+
+ ASRC: Arbitrary Source 
+     device b.xtest.x_stage1.xn.b b.xtest.x_stage1.xn.b b.xtest.x_stage1.xn.b
+      dtemp                     0                     0                     0
+          i           3.88767e-06           0.000159155                     0
+          v                 -13.5              -15915.5          -0.000213428
+   pos_node                    20                    17                    15
+   neg_node                     0                     0                     0
+
+ ASRC: Arbitrary Source 
+     device b.xtest.x_stage1.xp.b b.xtest.x_stage1.xp.b b.xtest.x_stage1.xp.b
+      dtemp                     0                     0                     0
+          i           3.88778e-06           0.000159155                     0
+          v                 -13.5              -15915.5          -0.000213412
+   pos_node                    11                     8                     6
+   neg_node                     0                     0                     0
+
+ Capacitor: Fixed capacitor
+     device c.xtest.x_stage3.c_p2   c.xtest.x_stage3.c1 c.xtest.x_stage2.xn.c
+      model                     C                     C                     C
+capacitance           7.95775e-11           1.59155e-10           7.95775e-11
+      dtemp                     0                     0                     0
+     bv_max                 1e+99                 1e+99                 1e+99
+          i                     0                     0                     0
+          p                    -0                    -0                     0
+
+ Capacitor: Fixed capacitor
+     device c.xtest.x_stage2.xn.c c.xtest.x_stage2.xp.c c.xtest.x_stage2.xp.c
+      model                     C                     C                     C
+capacitance           1.59155e-10           7.95775e-11           1.59155e-10
+      dtemp                     0                     0                     0
+     bv_max                 1e+99                 1e+99                 1e+99
+          i                     0                     0                     0
+          p                     0                     0                     0
+
+ Capacitor: Fixed capacitor
+     device c.xtest.x_stage1.xn.c c.xtest.x_stage1.xn.c c.xtest.x_stage1.xp.c
+      model                     C                     C                     C
+capacitance           7.95775e-11           1.59155e-10           7.95775e-11
+      dtemp                     0                     0                     0
+     bv_max                 1e+99                 1e+99                 1e+99
+          i                     0                     0                     0
+          p                    -0                    -0                    -0
+
+ Capacitor: Fixed capacitor
+     device c.xtest.x_stage1.xp.c
+      model                     C
+capacitance           1.59155e-10
+      dtemp                     0
+     bv_max                 1e+99
+          i                     0
+          p                    -0
+
+ Isource: Independent current source
+     device i.xtest.x_stage3.i_b_ i.xtest.x_stage3.i_b_ i.xtest.x_stage2.xn.i
+         dc                 8e-08                 8e-08                 8e-08
+          m                     1                     1                     1
+      acmag                     0                     0                     0
+      pulse         -         -         -
+        sin         -         -         -
+        exp         -         -         -
+        pwl         -         -         -
+       sffm         -         -         -
+         am         -         -         -
+    trnoise         -         -         -
+   trrandom         -         -         -
+          v               -11.026              -12.2576               -13.478
+          p           8.82081e-07           9.80611e-07           1.07824e-06
+    current                 8e-08                 8e-08                 8e-08
+
+ Isource: Independent current source
+     device i.xtest.x_stage2.xn.i i.xtest.x_stage2.xp.i i.xtest.x_stage2.xp.i
+         dc                 8e-08                 8e-08                 8e-08
+          m                     1                     1                     1
+      acmag                     0                     0                     0
+      pulse         -         -         -
+        sin         -         -         -
+        exp         -         -         -
+        pwl         -         -         -
+       sffm         -         -         -
+         am         -         -         -
+    trnoise         -         -         -
+   trrandom         -         -         -
+          v               13.5006              -13.4791               13.5006
+          p          -1.08005e-06           1.07833e-06          -1.08005e-06
+    current                 8e-08                 8e-08                 8e-08
+
+ Isource: Independent current source
+     device i.xtest.x_stage1.xn.i i.xtest.x_stage1.xn.i i.xtest.x_stage1.xp.i
+         dc                 8e-08                 8e-08                 8e-08
+          m                     1                     1                     1
+      acmag                     0                     0                     0
+      pulse         -         -         -
+        sin         -         -         -
+        exp         -         -         -
+        pwl         -         -         -
+       sffm         -         -         -
+         am         -         -         -
+    trnoise         -         -         -
+   trrandom         -         -         -
+          v               13.4983           0.000786572               13.4983
+          p          -1.07987e-06          -6.29258e-11          -1.07987e-06
+    current                 8e-08                 8e-08                 8e-08
+
+ Isource: Independent current source
+     device i.xtest.x_stage1.xp.i
+         dc                 8e-08
+          m                     1
+      acmag                     0
+      pulse         -
+        sin         -
+        exp         -
+        pwl         -
+       sffm         -
+         am         -
+    trnoise         -
+   trrandom         -
+          v          -0.000213412
+          p           1.70729e-11
+    current                 8e-08
+
+ Resistor: Simple linear resistor
+     device r.xtest.x_stage3.rout r.xtest.x_stage3.r_p2   r.xtest.x_stage3.r1
+      model                     R                     R                     R
+ resistance                   100                  1000                 1e+08
+         ac                   100                  1000                 1e+08
+      dtemp                     0                     0                     0
+     bv_max                 1e+99                 1e+99                 1e+99
+      noisy                     1                     1                     1
+          i           0.000245015                     0          -0.000159155
+          p           6.00324e-06                     0               2.53303
+
+ Resistor: Simple linear resistor
+     device  r.xtest.x_stage3.rd-  r.xtest.x_stage3.rd+ r.xtest.x_stage3.rin_
+      model                     R                     R                     R
+ resistance                 1e+13                 1e+13                 1e+07
+         ac                 1e+13                 1e+13                 1e+07
+      dtemp                     0                     0                     0
+     bv_max                 1e+99                 1e+99                 1e+99
+      noisy                     1                     1                     1
+          i            1.1026e-12           1.22576e-12           1.23163e-07
+          p           1.21573e-11            1.5025e-11           1.51691e-07
+
+ Resistor: Simple linear resistor
+     device            r.xtest.r4            r.xtest.r3            r.xtest.r2
+      model                     R                     R                     R
+ resistance                100000                 10000                100000
+         ac                100000                 10000                100000
+      dtemp                     0                     0                     0
+     bv_max                 1e+99                 1e+99                 1e+99
+      noisy                     1                     1                     1
+          i            0.00012259           0.000122793           0.000245015
+          p            0.00150283           0.000150782            0.00600324
+
+ Resistor: Simple linear resistor
+     device            r.xtest.r1   r.xtest.x_stage2.rg   r.xtest.x_stage2.rn
+      model                     R                     R                     R
+ resistance                 10000               222.222                  1000
+         ac                 10000               222.222                  1000
+      dtemp                     0                     0                     0
+     bv_max                 1e+99                 1e+99                 1e+99
+      noisy                     1                     1                     1
+          i           0.000244972           5.04402e-06           2.26616e-06
+          p           0.000600112           5.65382e-09           5.13549e-09
+
+ Resistor: Simple linear resistor
+     device   r.xtest.x_stage2.rp r.xtest.x_stage2.xn.r r.xtest.x_stage2.xn.r
+      model                     R                     R                     R
+ resistance                  1000                   100                  1000
+         ac                  1000                   100                  1000
+      dtemp                     0                     0                     0
+     bv_max                 1e+99                 1e+99                 1e+99
+      noisy                     1                     1                     1
+          i            -7.822e-06          -0.000242706                     0
+          p           6.11837e-08           5.89061e-06                     0
+
+ Resistor: Simple linear resistor
+     device r.xtest.x_stage2.xn.r r.xtest.x_stage2.xn.r r.xtest.x_stage2.xn.r
+      model                     R                     R                     R
+ resistance                 1e+08                 1e+13                 1e+13
+         ac                 1e+08                 1e+13                 1e+13
+      dtemp                     0                     0                     0
+     bv_max                 1e+99                 1e+99                 1e+99
+      noisy                     1                     1                     1
+          i           0.000159155            1.3478e-12          -1.35006e-12
+          p               2.53303           1.81656e-11           1.82266e-11
+
+ Resistor: Simple linear resistor
+     device r.xtest.x_stage2.xn.r r.xtest.x_stage2.xp.r r.xtest.x_stage2.xp.r
+      model                     R                     R                     R
+ resistance                 1e+07                   100                  1000
+         ac                 1e+07                   100                  1000
+      dtemp                     0                     0                     0
+     bv_max                 1e+99                 1e+99                 1e+99
+      noisy                     1                     1                     1
+          i          -2.69786e-06          -0.000130615                     0
+          p           7.27845e-05           1.70603e-06                     0
+
+ Resistor: Simple linear resistor
+     device r.xtest.x_stage2.xp.r r.xtest.x_stage2.xp.r r.xtest.x_stage2.xp.r
+      model                     R                     R                     R
+ resistance                 1e+08                 1e+13                 1e+13
+         ac                 1e+08                 1e+13                 1e+13
+      dtemp                     0                     0                     0
+     bv_max                 1e+99                 1e+99                 1e+99
+      noisy                     1                     1                     1
+          i           0.000159155           1.34791e-12          -1.35006e-12
+          p               2.53303           1.81687e-11           1.82266e-11
+
+ Resistor: Simple linear resistor
+     device r.xtest.x_stage2.xp.r   r.xtest.x_stage1.rg   r.xtest.x_stage1.rn
+      model                     R                     R                     R
+ resistance                 1e+07               222.222                  1000
+         ac                 1e+07               222.222                  1000
+      dtemp                     0                     0                     0
+     bv_max                 1e+99                 1e+99                 1e+99
+      noisy                     1                     1                     1
+          i          -2.69797e-06           5.00392e-11           1.26981e-06
+          p           7.27906e-05           5.56427e-19           1.61241e-09
+
+ Resistor: Simple linear resistor
+     device   r.xtest.x_stage1.rp r.xtest.x_stage1.xn.r r.xtest.x_stage1.xn.r
+      model                     R                     R                     R
+ resistance                  1000                   100                  1000
+         ac                  1000                   100                  1000
+      dtemp                     0                     0                     0
+     bv_max                 1e+99                 1e+99                 1e+99
+      noisy                     1                     1                     1
+          i           1.26981e-06           3.88767e-06                     0
+          p           1.61241e-09            1.5114e-09                     0
+
+ Resistor: Simple linear resistor
+     device r.xtest.x_stage1.xn.r r.xtest.x_stage1.xn.r r.xtest.x_stage1.xn.r
+      model                     R                     R                     R
+ resistance                 1e+08                 1e+13                 1e+13
+         ac                 1e+08                 1e+13                 1e+13
+      dtemp                     0                     0                     0
+     bv_max                 1e+99                 1e+99                 1e+99
+      noisy                     1                     1                     1
+          i          -0.000159155          -1.34983e-12          -7.86572e-17
+          p               2.53303           1.82205e-11           6.18696e-20
+
+ Resistor: Simple linear resistor
+     device r.xtest.x_stage1.xn.r r.xtest.x_stage1.xp.r r.xtest.x_stage1.xp.r
+      model                     R                     R                     R
+ resistance                 1e+07                   100                  1000
+         ac                 1e+07                   100                  1000
+      dtemp                     0                     0                     0
+     bv_max                 1e+99                 1e+99                 1e+99
+      noisy                     1                     1                     1
+          i           1.34976e-06           3.88778e-06                     0
+          p           1.82184e-05           1.51148e-09                     0
+
+ Resistor: Simple linear resistor
+     device r.xtest.x_stage1.xp.r r.xtest.x_stage1.xp.r r.xtest.x_stage1.xp.r
+      model                     R                     R                     R
+ resistance                 1e+08                 1e+13                 1e+13
+         ac                 1e+08                 1e+13                 1e+13
+      dtemp                     0                     0                     0
+     bv_max                 1e+99                 1e+99                 1e+99
+      noisy                     1                     1                     1
+          i          -0.000159155          -1.34983e-12           2.13412e-17
+          p               2.53303           1.82205e-11           4.55446e-21
+
+ Resistor: Simple linear resistor
+     device r.xtest.x_stage1.xp.r
+      model                     R
+ resistance                 1e+07
+         ac                 1e+07
+      dtemp                     0
+     bv_max                 1e+99
+      noisy                     1
+          i           1.34986e-06
+          p           1.82211e-05
+
+ VCVS: Voltage controlled voltage source
+     device e.xtest.x_stage3.e_p2 e.xtest.x_stage3.e_cm e.xtest.x_stage2.xn.e
+          i                     0           2.03164e-07                     0
+          v              -15915.5           0.000368168               15915.5
+          p                    -0           7.47986e-11                     0
+
+ VCVS: Voltage controlled voltage source
+     device e.xtest.x_stage2.xn.e e.xtest.x_stage2.xp.e e.xtest.x_stage2.xp.e
+          i          -2.61786e-06                     0          -2.61797e-06
+          v          -3.41773e-07               15915.5           -3.2405e-07
+          p           8.94716e-13                     0           8.48355e-13
+
+ VCVS: Voltage controlled voltage source
+     device e.xtest.x_stage1.xn.e e.xtest.x_stage1.xn.e e.xtest.x_stage1.xp.e
+          i                     0           1.42976e-06                     0
+          v              -15915.5          -0.000213428              -15915.5
+          p                    -0          -3.05149e-10                    -0
+
+ VCVS: Voltage controlled voltage source
+     device e.xtest.x_stage1.xp.e
+          i           1.42986e-06
+          v          -0.000213412
+          p          -3.05148e-10
+
+ Vsource: Independent voltage source
+     device v.xtest.x_stage3.v_os v.xtest.x_stage2.xn.v v.xtest.x_stage2.xp.v
+         dc                 0.001                 0.001                 0.001
+      acmag                     0                     0                     0
+      pulse         -         -         -
+        sin         -         -         -
+        exp         -         -         -
+        pwl         -         -         -
+       sffm         -         -         -
+         am         -         -         -
+    trnoise         -         -         -
+   trrandom         -         -         -
+    portnum                     0                     0                     0
+         z0                     0                     0                     0
+        pwr                     0                     0                     0
+       freq                     0                     0                     0
+      phase                     0                     0                     0
+          i           2.03164e-07          -2.61786e-06          -2.61797e-06
+          p           2.03164e-10          -2.61786e-09          -2.61797e-09
+
+ Vsource: Independent voltage source
+     device v.xtest.x_stage1.xn.v v.xtest.x_stage1.xp.v                   vin
+         dc                 0.001                 0.001                 0.001
+      acmag                     0                     0                     0
+      pulse         -         -         -
+        sin         -         -         -
+        exp         -         -         -
+        pwl         -         -         -
+       sffm         -         -         -
+         am         -         -         -
+    trnoise         -         -         -
+   trrandom         -         -         -
+    portnum                     0                     0                     0
+         z0                     0                     0                     0
+        pwr                     0                     0                     0
+       freq                     0                     0                     0
+      phase                     0                     0                     0
+          i           1.42976e-06           1.42986e-06          -1.42986e-06
+          p           1.42976e-09           1.42986e-09          -1.42986e-09
+
+ Vsource: Independent voltage source
+     device                   vee                   vcc
+         dc                   -15                    15
+      acmag                     0                     0
+      pulse         -         -
+        sin         -         -
+        exp         -         -
+        pwl         -         -
+       sffm         -         -
+         am         -         -
+    trnoise         -         -
+   trrandom         -         -
+    portnum                     0                     0
+         z0                     0                     0
+        pwr                     0                     0
+       freq                     0                     0
+      phase                     0                     0
+          i                     0                     0
+          p                    -0                     0
+
+                            * test for supopamp.cir
+                            Operating Point  Wed Jun 17 20:53:57  2026
+--------------------------------------------------------------------------------
+Index   v(out)          
+--------------------------------------------------------------------------------
+0	-1.34755e+01	
+
+
+Total analysis time (seconds) = 0.00199986
+
+Total elapsed time (seconds) = 0.062 
+
+Total DRAM available = 32512.117 MB.
+DRAM currently available = 12986.734 MB.
+Maximum ngspice program size =   18.566 MB.
+Current ngspice program size =   18.566 MB.
+

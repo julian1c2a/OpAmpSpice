@@ -1,0 +1,117 @@
+Error opening code model "/C"
+: No se puede encontrar el módulo especificado.
+
+Error: Library /C couldn't be loaded!
+Error opening code model "/C"
+: No se puede encontrar el módulo especificado.
+
+Error: Library /C couldn't be loaded!
+Error opening code model "/C"
+: No se puede encontrar el módulo especificado.
+
+Error: Library /C couldn't be loaded!
+Error opening code model "/C"
+: No se puede encontrar el módulo especificado.
+
+Error: Library /C couldn't be loaded!
+Error opening code model "/C"
+: No se puede encontrar el módulo especificado.
+
+Error: Library /C couldn't be loaded!
+Error opening code model "/C"
+: No se puede encontrar el módulo especificado.
+
+Error: Library /C couldn't be loaded!
+Error opening code model "/C"
+: No se puede encontrar el módulo especificado.
+
+Error: Library /C couldn't be loaded!
+
+Note: No compatibility mode selected!
+
+
+Circuit: * debug dc offset
+
+Doing analysis at TEMP = 27.000000 and TNOM = 27.000000
+
+Using SPARSE 1.3 as Direct Linear Solver
+
+No. of Data Rows : 1
+b.xtest.x_stage1.xn.b2#branch = 3.878692e-06
+b.xtest.x_stage1.xn.be_cmrr#branch = 0.000000e+00
+b.xtest.x_stage1.xp.b2#branch = 3.878692e-06
+b.xtest.x_stage1.xp.be_cmrr#branch = 0.000000e+00
+b.xtest.x_stage2.xn.b2#branch = -1.10895e-03
+b.xtest.x_stage2.xn.be_cmrr#branch = 0.000000e+00
+b.xtest.x_stage2.xp.b2#branch = -5.62731e-04
+b.xtest.x_stage2.xp.be_cmrr#branch = 0.000000e+00
+b.xtest.x_stage3.b2#branch = 1.109387e-03
+b.xtest.x_stage3.be_cmrr#branch = 0.000000e+00
+e.xtest.x_stage1.xn.e_cmrr#branch = 1.429756e-06
+e.xtest.x_stage1.xn.e_p2#branch = 0.000000e+00
+e.xtest.x_stage1.xp.e_cmrr#branch = 1.429756e-06
+e.xtest.x_stage1.xp.e_p2#branch = 0.000000e+00
+e.xtest.x_stage2.xn.e_cmrr#branch = -2.60894e-06
+e.xtest.x_stage2.xn.e_p2#branch = 0.000000e+00
+e.xtest.x_stage2.xp.e_cmrr#branch = -2.60894e-06
+e.xtest.x_stage2.xp.e_p2#branch = 0.000000e+00
+e.xtest.x_stage3.e_cmrr#branch = 6.370257e-07
+e.xtest.x_stage3.e_p2#branch = 0.000000e+00
+in = 0.000000e+00
+out = -1.33891e+01
+v.xtest.x_stage1.xn.v_os#branch = 1.429756e-06
+v.xtest.x_stage1.xp.v_os#branch = 1.429756e-06
+v.xtest.x_stage2.xn.v_os#branch = -2.60894e-06
+v.xtest.x_stage2.xp.v_os#branch = -2.60894e-06
+v.xtest.x_stage3.v_os#branch = 6.370257e-07
+vcc = 1.500000e+01
+vcc#branch = 0.000000e+00
+vee = -1.50000e+01
+vee#branch = 0.000000e+00
+vin#branch = -1.42976e-06
+xtest.opamp_in_minus = 2.300003e+00
+xtest.opamp_in_plus = 7.871413e+00
+xtest.out1_n = -1.34996e+01
+xtest.out1_p = -1.34996e+01
+xtest.out2_n = 1.338911e+01
+xtest.out2_p = 1.344373e+01
+xtest.x_stage1.inn- = -1.34983e+01
+xtest.x_stage1.inp- = -1.34983e+01
+xtest.x_stage1.xn.e_cmrr_int1 = -2.13428e-04
+xtest.x_stage1.xn.in_plus_final = -7.86572e-04
+xtest.x_stage1.xn.in_plus_offset = -1.00000e-03
+xtest.x_stage1.xn.n_limited = -1.35000e+01
+xtest.x_stage1.xn.n_p2_drive = -1.59155e+04
+xtest.x_stage1.xn.preout = -1.59155e+04
+xtest.x_stage1.xn.preout2 = -1.59155e+04
+xtest.x_stage1.xp.e_cmrr_int1 = -2.13428e-04
+xtest.x_stage1.xp.in_plus_final = -7.86572e-04
+xtest.x_stage1.xp.in_plus_offset = -1.00000e-03
+xtest.x_stage1.xp.n_limited = -1.35000e+01
+xtest.x_stage1.xp.n_p2_drive = -1.59155e+04
+xtest.x_stage1.xp.preout = -1.59155e+04
+xtest.x_stage1.xp.preout2 = -1.59155e+04
+xtest.x_stage2.inn- = 1.338873e+01
+xtest.x_stage2.inp- = 1.338873e+01
+xtest.x_stage2.xn.e_cmrr_int1 = -1.75326e-06
+xtest.x_stage2.xn.in_plus_final = -1.35006e+01
+xtest.x_stage2.xn.in_plus_offset = -1.35006e+01
+xtest.x_stage2.xn.n_limited = 1.350000e+01
+xtest.x_stage2.xn.n_p2_drive = 1.591549e+04
+xtest.x_stage2.xn.preout = 1.591549e+04
+xtest.x_stage2.xn.preout2 = 1.591549e+04
+xtest.x_stage2.xp.e_cmrr_int1 = -1.75325e-06
+xtest.x_stage2.xp.in_plus_final = -1.35006e+01
+xtest.x_stage2.xp.in_plus_offset = -1.35006e+01
+xtest.x_stage2.xp.n_limited = 1.350000e+01
+xtest.x_stage2.xp.n_p2_drive = 1.591549e+04
+xtest.x_stage2.xp.preout = 1.591549e+04
+xtest.x_stage2.xp.preout2 = 1.591549e+04
+xtest.x_stage3.e_cmrr_int1 = 1.608242e-04
+xtest.x_stage3.in_plus_final = 7.870252e+00
+xtest.x_stage3.in_plus_offset = 7.870413e+00
+xtest.x_stage3.n_limited = -1.35000e+01
+xtest.x_stage3.n_p2_drive = -1.59155e+04
+xtest.x_stage3.preout = -1.59155e+04
+xtest.x_stage3.preout2 = -1.59155e+04
+Note: Simulation executed from .control section 
